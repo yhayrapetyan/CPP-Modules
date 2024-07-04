@@ -6,13 +6,13 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 16:50:40 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/07/04 17:36:23 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/07/04 18:13:53 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanB.hpp"
 
-HumanB::HumanB(string name): _weapon()
+HumanB::HumanB(string name)//: _weapon()
 {
 	this->_name = name;
 	this->_is_armed = false;

@@ -1,27 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.cpp                                         :+:      :+:    :+:   */
+/*   Changer.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/04 16:15:29 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/07/04 18:15:19 by yuhayrap         ###   ########.fr       */
+/*   Created: 2024/07/04 18:36:25 by yuhayrap          #+#    #+#             */
+/*   Updated: 2024/07/04 19:15:25 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
+#ifndef CHANGER_H
+# define CHANGER_H
 
-HumanA::HumanA(string name, Weapon &weapon):
-	_name(name),
-	_weapon(weapon)
-{}
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdlib>
+#include <filesystem>
 
-HumanA::~HumanA(void) {
-	
-}
+typedef std::string string;
 
-void	HumanA::attack(void)
+class Changer
 {
-	std::cout << this->_name << " attacks with their " << this->_weapon.getType() << std::endl;
-}
+	public:
+		Changer(string filename);
+		~Changer(void);
+		void replace(string to_change,string value);
+
+	private:
+		string	_filename;
+};
+
+#endif
