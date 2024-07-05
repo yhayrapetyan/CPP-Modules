@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:13:21 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/07/05 16:02:40 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/07/05 16:23:39 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,9 @@ float   Fixed::toFloat(void) const
 {
 	return (this->_fixPointNb / float(1 << _fractionalBitNB));
 }
-
 std::ostream &operator<<(std::ostream &out, const Fixed &fixed)
 {
     out << fixed.toFloat();
     return (out);
 }
+
