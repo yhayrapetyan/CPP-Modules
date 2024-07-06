@@ -13,18 +13,18 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(void) {
-	std::cout << "Default constructor\n";
+	std::cout << "ClapTrap Default constructor\n";
 	this->_hit = 10;
 	this->_energy = 10;
 	this->_damage = 0;
 }
 
 ClapTrap::~ClapTrap(void) {
-	std::cout << "Default destructor\n";
+	std::cout << "ClapTrap Default destructor\n";
 }
 
 ClapTrap::ClapTrap(const ClapTrap &claptrap) {
-	std::cout << "Copy constructor\n";
+	std::cout << "ClapTrap Copy constructor\n";
 	this->_name = claptrap._name;
 	this->_hit = claptrap._hit;
 	this->_energy = claptrap._energy;
@@ -32,7 +32,7 @@ ClapTrap::ClapTrap(const ClapTrap &claptrap) {
 }
 
 ClapTrap &ClapTrap::operator=(const ClapTrap &claptrap) {
-	std::cout << "Copy assign constructor\n";
+	std::cout << "ClapTrap Copy assign constructor\n";
 	this->_name = claptrap._name;
 	this->_hit = claptrap._hit;
 	this->_energy = claptrap._energy;
@@ -41,7 +41,7 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &claptrap) {
 }
 
 ClapTrap::ClapTrap(string name) {
-	std::cout << "Main constructor\n";
+	std::cout << "ClapTrap Main constructor\n";
 	this->_hit = 10;
 	this->_energy = 10;
 	this->_damage = 0;
