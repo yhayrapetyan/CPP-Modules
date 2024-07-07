@@ -1,6 +1,6 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(void): ClapTrap() {
+ScavTrap::ScavTrap(void) : ClapTrap() {
 	std::cout << "ScavTrap Default constructor\n";
 	this->_hit = 100;
 	this->_energy = 50;
@@ -11,7 +11,7 @@ ScavTrap::~ScavTrap(void) {
 	std::cout << "ScavTrap Default destructor\n";
 }
 
-ScavTrap::ScavTrap(const ScavTrap &scavtrap): ClapTrap(scavtrap) {//idk about this
+ScavTrap::ScavTrap(const ScavTrap &scavtrap) : ClapTrap(scavtrap) {//idk about this
 	std::cout << "ScavTrap Copy constructor\n";
 	this->_name = scavtrap._name;
 	this->_hit = scavtrap._hit;
@@ -28,7 +28,7 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &scavtrap) {
 	return (*this);
 }
 
-ScavTrap::ScavTrap(string name): ClapTrap(name) {
+ScavTrap::ScavTrap(string name) : ClapTrap(name) {
 	std::cout << "ScavTrap Main constructor\n";
 	this->_hit = 100;
 	this->_energy = 50;

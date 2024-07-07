@@ -6,7 +6,7 @@ WrongAnimal::WrongAnimal() {
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal &copy) {
-	std::cout << "WrongAnimal Copy Constructor called\n" ;
+	std::cout << "WrongAnimal Copy Constructor called\n";
 	*this = copy;
 }
 

@@ -17,35 +17,33 @@
 #include <ctime>
 #include <iomanip>
 
-class Account 
-{	
-	
-	public:
-		typedef Account		t;
-		
-		Account(int	start_deposit);
-		~Account(void);
-		
-		static void	displayAccountsInfos(void);
-		static int	getAccountsNb(void);
-		static int	getTotalAmount(void);
-		static int	getDepositsNb(void);
-		static int	getWithdrawalsNb(void);
-		
-		bool	makeWithdrawal(int withdrawal);
-		void	makeDeposit(int deposit);
-		void	displayStatus(void);
+class Account {
 
-	private:
-		static void _displayTimestamp(void);
-		static int _accountsNb;
-		static int	_totalAmount;
-		static int	_totalDepositsNb;
-		static int	_totalWithdrawalsNb;
-		int			_index;
-		int			_amount;
-		int			_depositsNb;
-		int			_withdrawalsNb;
+public:
+	typedef Account t;
+
+	Account(int start_deposit);
+	~Account(void);
+	static void displayAccountsInfos(void);
+	static int getAccountsNb(void);
+	static int getTotalAmount(void);
+	static int getDepositsNb(void);
+	static int getWithdrawalsNb(void);
+	bool makeWithdrawal(int withdrawal);
+	void makeDeposit(int deposit);
+	void displayStatus(void);
+
+private:
+	static void _displayTimestamp(void);
+
+	static int _accountsNb;
+	static int _totalAmount;
+	static int _totalDepositsNb;
+	static int _totalWithdrawalsNb;
+	int _index;
+	int _amount;
+	int _depositsNb;
+	int _withdrawalsNb;
 };
 
 #endif

@@ -12,15 +12,14 @@
 
 #include "Zombie.hpp"
 
-int	main()
-{
-	Zombie	*Z;
+int main() {
+	Zombie *Z;
 
 	Z = newZombie("Stack");
 	Z->announce();
 
 	randomChump("Heap");
-	delete	Z;
+	delete Z;
 
 	return (0);
 }

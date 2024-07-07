@@ -6,27 +6,26 @@
 #include "IMateriaSource.hpp"
 #include "MateriaSource.hpp"
 
-void ft_tests()
-{
+void ft_tests() {
 	// Constructors
 	std::cout << std::endl;
 	std::cout << "CONSTRUCTORS:" << std::endl;
 	std::cout << "-----------------------" << std::endl;
 
-	IMateriaSource* src = new MateriaSource();
+	IMateriaSource *src = new MateriaSource();
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());
-	ICharacter* me = new Character("me");
+	ICharacter *me = new Character("me");
 	std::cout << std::endl;
 
 	// Create Materia
 	std::cout << "CREATE MATERIA:" << std::endl;
 	std::cout << "-----------------------" << std::endl;
-	AMateria	*tmp;
+	AMateria *tmp;
 
-	AMateria	*tmp1;
-	AMateria	*tmp2;
-	AMateria	*tmp3;
+	AMateria *tmp1;
+	AMateria *tmp2;
+	AMateria *tmp3;
 //	AMateria	*tmp4;
 
 	tmp = src->createMateria("ice");
@@ -40,7 +39,7 @@ void ft_tests()
 	// Use on a new character
 	std::cout << "USE ON A NEW CHARACTER:" << std::endl;
 	std::cout << "-----------------------" << std::endl;
-	ICharacter* bob = new Character("bob");
+	ICharacter *bob = new Character("bob");
 	me->use(0, *bob);
 	me->use(1, *bob);
 	std::cout << std::endl;
@@ -52,14 +51,14 @@ void ft_tests()
 	// Deep copy character
 	std::cout << "DEEP COPY CHARACTER:" << std::endl;
 	std::cout << "-----------------------" << std::endl;
-	Character	*charles = new Character("Charles");
+	Character *charles = new Character("Charles");
 	tmp2 = src->createMateria("cure");
 	charles->equip(tmp2);
 	tmp3 = src->createMateria("ice");
 	charles->equip(tmp3);
 	tmp = src->createMateria("earth");
 	charles->equip(tmp);
-	Character	*charles_copy = new Character(*charles);
+	Character *charles_copy = new Character(*charles);
 	std::cout << std::endl;
 
 	// Deep copy vs its source character
@@ -114,8 +113,7 @@ void ft_tests()
 	//system("leaks ex03");
 }
 
-int main()
-{
+int main() {
 //	IMateriaSource* src = new MateriaSource();
 //	src->learnMateria(new Ice());
 //	src->learnMateria(new Cure());

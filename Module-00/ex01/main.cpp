@@ -12,23 +12,20 @@
 
 #include "Phonebook.hpp"
 
-int	main(void)
-{
-	Phonebook	phonebook;
-	string		str;
+int main(void) {
+	Phonebook phonebook;
+	string str;
 
-	while (str != "EXIT")
-	{
+	while (str != "EXIT") {
 		std::getline(std::cin, str);
 		if (str == "ADD")
 			phonebook.add();
 		else if (str == "SEARCH")
 			phonebook.search();
-		if (std::cin.eof())
-		{
+		if (std::cin.eof()) {
 			std::cout << std::endl;
 			return 0;
-		}		
+		}
 	}
 	return 0;
 }

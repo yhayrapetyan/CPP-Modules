@@ -7,8 +7,7 @@
 
 typedef std::string string;
 
-class Character : public ICharacter{
-
+class Character : public ICharacter {
 public:
 	Character();
 	Character(const string &name);

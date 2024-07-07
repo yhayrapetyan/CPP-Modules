@@ -21,15 +21,14 @@
 
 typedef std::string string;
 
-class Changer
-{
-	public:
-		Changer(string filename);
-		~Changer(void);
-		void replace(string to_change,string value);
+class Changer {
+public:
+	Changer(string filename);
+	~Changer(void);
+	void replace(string to_change, string value);
 
-	private:
-		string	_filename;
+private:
+	string _filename;
 };
 
 #endif

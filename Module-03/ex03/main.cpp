@@ -15,8 +15,7 @@
 #include "FragTrap.hpp"
 #include "DiamondTrap.hpp"
 
-int main()
-{
+int main() {
 	std::cout << "### TESTING CLAPTRAP ###\n" << std::endl;
 	{
 		std::cout << "\033[34mConstructing\033[0m" << std::endl;

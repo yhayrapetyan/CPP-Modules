@@ -17,6 +17,7 @@ public:
 
 protected:
 	string *_ideas;
+
 };
 
 #endif

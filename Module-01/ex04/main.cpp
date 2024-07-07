@@ -12,9 +12,8 @@
 
 #include "Changer.hpp"
 
-int	main(int ac, char **av)
-{
-	if (ac != 4){
+int main(int ac, char **av) {
+	if (ac != 4) {
 		std::cerr << "Invalid number of arguments\n" << std::endl;
 		return 1;
 	}

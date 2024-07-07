@@ -5,7 +5,6 @@
 #include "Brain.hpp"
 
 class Cat : public Animal   {
-
 public:
 	Cat();
 	Cat(Cat &other);
@@ -15,5 +14,6 @@ public:
 
 private:
 	Brain   *_brain;
+
 };
 #endif

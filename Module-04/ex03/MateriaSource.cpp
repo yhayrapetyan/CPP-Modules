@@ -4,7 +4,7 @@ MateriaSource::MateriaSource() {
 	this->_size = 0;
 	for (int i = 0; i < 4; i++)
 		this->_materias[i] = NULL;
-	std::cout  << "Default constructor for MateriaSource\n";
+	std::cout << "Default constructor for MateriaSource\n";
 }
 
 MateriaSource::~MateriaSource() {
@@ -29,9 +29,9 @@ MateriaSource &MateriaSource::operator=(const MateriaSource &other) {
 }
 
 void MateriaSource::learnMateria(AMateria *materia) {
-	if (!materia){
+	if (!materia) {
 		std::cout << "Error No materia specified\n";
-		return ;
+		return;
 	}
 	if (this->_size < 4)
 		this->_materias[(this->_size)++] = materia;

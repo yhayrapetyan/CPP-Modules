@@ -12,23 +12,20 @@
 
 #include "Harl.hpp"
 
-int main(void)
-{
-    Harl        harl;
-    std::string	cmd;
+int main(void) {
+	Harl harl;
+	std::string cmd;
 
-    std::cout << "Usage: " << "DEBUG " << "INFO " << "WARNING " << "ERROR "  << "EXIT" << std::endl;
-    while (true)
-    {
-        std::getline(std::cin, cmd);
-        if (std::cin.eof())
-        {
-            std::cout << "Exited" << std::endl;
-            return (1);
-        }
-        if (cmd == "EXIT")
-            return (0);
-        harl.complain(cmd);
-    }
-    return (0);
+	std::cout << "Usage: " << "DEBUG " << "INFO " << "WARNING " << "ERROR " << "EXIT" << std::endl;
+	while (true) {
+		std::getline(std::cin, cmd);
+		if (std::cin.eof()) {
+			std::cout << "Exited" << std::endl;
+			return (1);
+		}
+		if (cmd == "EXIT")
+			return (0);
+		harl.complain(cmd);
+	}
+	return (0);
 }

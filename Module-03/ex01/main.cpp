@@ -13,11 +13,10 @@
 #include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
 
-int main()
-{
-	ClapTrap    Kenpachi("Clap1");
-	ClapTrap    Unohana("Clap2");
-	ScavTrap    Ulquiorra("Scav1");
+int main() {
+	ClapTrap Kenpachi("Clap1");
+	ClapTrap Unohana("Clap2");
+	ScavTrap Ulquiorra("Scav1");
 
 	Kenpachi.attack("Clap2");
 	Unohana.takeDamage(10);

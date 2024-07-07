@@ -18,18 +18,17 @@
 
 typedef std::string string;
 
-class  HumanB
-{
-	public:
-		HumanB(string name);
-		~HumanB(void);
-		void	attack(void);
-		void	setWeapon(Weapon &weapon);
+class HumanB {
+public:
+	HumanB(string name);
+	~HumanB(void);
+	void attack(void);
+	void setWeapon(Weapon &weapon);
 
-	private:
-		string _name;
-		bool	_is_armed;
-		Weapon* _weapon;
+private:
+	string _name;
+	bool _is_armed;
+	Weapon *_weapon;
 };
 
 #endif

@@ -15,20 +15,18 @@
 
 #include <iostream>
 
-class Fixed
-{
-	public:
-		Fixed(void);
-		~Fixed(void);
-		Fixed(const Fixed &fixed);
-        Fixed &operator=(const Fixed &fixed);
-		
-		void    setRawBits(int const raw);
-		int		getRawBits(void) const;
-	
-	private:
-		int					_fixPointNb;
-		static const int	_fractionalBitNB = 8;
+class Fixed {
+public:
+	Fixed(void);
+	~Fixed(void);
+	Fixed(const Fixed &fixed);
+	Fixed &operator=(const Fixed &fixed);
+	void setRawBits(int const raw);
+	int getRawBits(void) const;
+
+private:
+	int _fixPointNb;
+	static const int _fractionalBitNB = 8;
 };
 
 #endif

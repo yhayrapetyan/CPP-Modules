@@ -3,7 +3,7 @@
 Character::Character() {
 	this->_name = "unknown character";
 	this->_size = 0;
-	std::cout <<"Default constructor for Character [" << this->_name << "]\n";
+	std::cout << "Default constructor for Character [" << this->_name << "]\n";
 }
 
 Character::~Character() {
@@ -45,7 +45,7 @@ Character::Character(std::string const &name) {
 std::string const &Character::getName() const { return this->_name; }
 
 void Character::equip(AMateria *item) {
-	if (!item){
+	if (!item) {
 		std::cout << "Error No Item\n";
 		return;
 	}
@@ -79,7 +79,7 @@ void Character::use(int i, ICharacter &target) {
 	if (i < 4 && !this->_inventory[i])
 		std::cout << "Empty inventory in index " << "[" << i << "]\n";
 	else if (i > 3)
-		std::cout<< "ERROR you can use only 4 inventory, wrong index [" << i << "]\n";
+		std::cout << "ERROR you can use only 4 inventory, wrong index [" << i << "]\n";
 	if (i >= 0 && i < this->_size)
 		this->_inventory[i]->use(target);
 }

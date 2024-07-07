@@ -4,10 +4,9 @@
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
-int main()
-{
+int main() {
 	std::cout << "\033[34mConstructing\033[0m" << std::endl;
-	const Animal	*meta = new Animal();
+	const Animal *meta = new Animal();
 	std::cout << std::endl;
 	std::cout << "\033[34mTesting\033[0m" << std::endl;
 
@@ -23,7 +22,7 @@ int main()
 
 	std::cout << std::endl;
 	std::cout << "\033[34mConstructing\033[0m" << std::endl;
-	const Animal	*catto = new Cat();
+	const Animal *catto = new Cat();
 	std::cout << std::endl;
 
 	std::cout << "\033[34mTesting\033[0m" << std::endl;
@@ -39,10 +38,10 @@ int main()
 
 	std::cout << std::endl;
 	std::cout << "\033[34mConstructing\033[0m" << std::endl;
-	const Animal	*doggo = new Dog();
+	const Animal *doggo = new Dog();
 	std::cout << std::endl;
 	std::cout << "\033[34mTesting\033[0m" << std::endl;
-	std::cout << "Dog _type: " << doggo->getType() <<std::endl;
+	std::cout << "Dog _type: " << doggo->getType() << std::endl;
 	doggo->makeSound();
 	std::cout << std::endl;
 	std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
@@ -53,7 +52,7 @@ int main()
 
 	std::cout << std::endl;
 	std::cout << "\033[34mConstructing\033[0m" << std::endl;
-	const WrongAnimal	*wrong_meta = new WrongAnimal();
+	const WrongAnimal *wrong_meta = new WrongAnimal();
 	std::cout << std::endl;
 
 	std::cout << "\033[34mTesting\033[0m" << std::endl;
@@ -68,11 +67,11 @@ int main()
 	std::cout << "-------------------------------------------------------" << std::endl;
 
 	std::cout << "\033[34mConstructing\033[0m" << std::endl;
-	const WrongAnimal	*wrong_catto = new WrongCat();
+	const WrongAnimal *wrong_catto = new WrongCat();
 	std::cout << std::endl;
 
 	std::cout << "\033[34mTesting\033[0m" << std::endl;
-	std::cout << "WrongCat _type: " << wrong_catto->getType() <<std::endl;
+	std::cout << "WrongCat _type: " << wrong_catto->getType() << std::endl;
 	wrong_catto->makeSound();
 	std::cout << std::endl;
 
@@ -83,11 +82,11 @@ int main()
 	std::cout << "-------------------------------------------------------" << std::endl;
 
 	std::cout << "\033[34mConstructing\033[0m" << std::endl;
-	const WrongCat	*wrong_catta = new WrongCat();
+	const WrongCat *wrong_catta = new WrongCat();
 	std::cout << std::endl;
 
 	std::cout << "\033[34mTesting\033[0m" << std::endl;
-	std::cout << "WrongCat _type: " << wrong_catta->getType() <<std::endl;
+	std::cout << "WrongCat _type: " << wrong_catta->getType() << std::endl;
 	wrong_catta->makeSound();
 	std::cout << std::endl;
 

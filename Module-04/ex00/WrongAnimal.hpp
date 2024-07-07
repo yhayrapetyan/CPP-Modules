@@ -7,17 +7,18 @@
 typedef std::string string;
 
 class WrongAnimal{
-protected:
-	string _type;
-
 public:
+
 	WrongAnimal();
 	WrongAnimal(const WrongAnimal &copy);
 	virtual ~WrongAnimal();
 	WrongAnimal &operator=(const WrongAnimal &src);
-
 	void makeSound(void)const;
+
 	string getType(void)const;
+
+protected:
+	string _type;
 
 };
 

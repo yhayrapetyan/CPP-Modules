@@ -12,16 +12,15 @@
 
 #include "Zombie.hpp"
 
-int	main()
-{
-	Zombie	*Z;
-	int	n = 4;
+int main() {
+	Zombie *Z;
+	int n = 4;
 
 	Z = zombieHorde(n, "Some Name");
 
 	for (int i = 0; i < n; i++)
 		Z[i].announce();
-	
+
 	delete[] Z;
 	return (0);
 }

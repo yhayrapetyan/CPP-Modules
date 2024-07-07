@@ -6,7 +6,7 @@
 
 typedef std::string string;
 
-class WrongAnimal{
+class WrongAnimal {
 protected:
 	string _type;
 

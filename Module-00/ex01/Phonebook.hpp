@@ -16,19 +16,17 @@
 
 #include "Contact.hpp"
 
-class	Phonebook
-{
-	private:
-		Contact	_contacts[8];
-		int		_index;
-	public:
-		Phonebook(void);
-		~Phonebook(void);
-		void	add(void);
-		void	search(void);
-		void	print(Contact contact);
-		// /* Getters */
-		// Contact	get_contact(int index);
+class	Phonebook {
+public:
+	Phonebook(void);
+	~Phonebook(void);
+	void	add(void);
+	void	search(void);
+	void	print(Contact contact);
+
+private:
+	Contact	_contacts[8];
+	int		_index;
 };
 
 

@@ -7,8 +7,7 @@ typedef std::string string;
 
 class AMateria;
 
-class ICharacter    {
-
+class ICharacter {
 public:
 	virtual 					~ICharacter() {}
 	virtual	string const		&getName() const = 0;

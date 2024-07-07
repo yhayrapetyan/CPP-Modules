@@ -18,16 +18,15 @@
 
 typedef std::string string;
 
-class HumanA
-{
-	public:
-		HumanA(string name, Weapon &weapon);
-		~HumanA(void);
-		void	attack(void);
+class HumanA {
+public:
+	HumanA(string name, Weapon &weapon);
+	~HumanA(void);
+	void attack(void);
 
-	private:
-		string	_name;
-		Weapon&	_weapon;
+private:
+	string _name;
+	Weapon &_weapon;
 };
 
 #endif

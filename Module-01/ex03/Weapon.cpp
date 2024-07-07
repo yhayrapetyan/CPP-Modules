@@ -12,15 +12,13 @@
 
 #include "Weapon.hpp"
 
-Weapon::Weapon(string type)
-{
-	this->_type = type;	
+Weapon::Weapon(string type) {
+	this->_type = type;
 }
 
-Weapon::~Weapon(void)
-{
-	
+Weapon::~Weapon(void) {
+
 }
 
-string	Weapon::getType(void){ return this->_type; }
-void	Weapon::setType(string type){ this->_type = type; }
+string	 Weapon::getType(void) { return this->_type; }
+void	 Weapon::setType(string type) { this->_type = type; }

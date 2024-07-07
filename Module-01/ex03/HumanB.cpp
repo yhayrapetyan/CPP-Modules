@@ -12,27 +12,24 @@
 
 #include "HumanB.hpp"
 
-HumanB::HumanB(string name)//: _weapon()
-{
+HumanB::HumanB(string name){//: _weapon()
 	this->_name = name;
 	this->_is_armed = false;
 }
 
-HumanB::~HumanB(void)
-{
-	
+HumanB::~HumanB(void) {
+
 }
 
-void	HumanB::attack(void)
-{
+void HumanB::attack(void) {
 	if (this->_is_armed)
 		std::cout << this->_name << " attacks with their " \
-			<< this->_weapon->getType() << std::endl;
+ << this->_weapon->getType() << std::endl;
 	else
 		std::cout << this->_name << " attacks with his fists." << std::endl;
 }
-void    HumanB::setWeapon(Weapon &weapon)
-{
-	this->_is_armed =true;
+
+void HumanB::setWeapon(Weapon &weapon) {
+	this->_is_armed = true;
 	this->_weapon = &weapon;
 }

@@ -1,6 +1,6 @@
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap(void): ClapTrap("unknown Clap"){
+DiamondTrap::DiamondTrap(void) : ClapTrap("unknown Clap") {
 	std::cout << "DiamondTrap Default constructor\n";
 	this->_hit = FragTrap::_hit;
 	this->_energy = ScavTrap::_energy;
@@ -12,7 +12,8 @@ DiamondTrap::~DiamondTrap(void) {
 	std::cout << "DiamondTrap Default destructor\n";
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap &diamondtrap) : ClapTrap(diamondtrap), ScavTrap(diamondtrap), FragTrap(diamondtrap) {//idk about this
+DiamondTrap::DiamondTrap(const DiamondTrap &diamondtrap) : ClapTrap(diamondtrap), ScavTrap(diamondtrap),
+														   FragTrap(diamondtrap) {//idk about this
 	std::cout << "DiamondTrap Copy constructor\n";
 	this->_name = diamondtrap._name;
 	this->_hit = diamondtrap._hit;

@@ -1,11 +1,11 @@
 #include "Ice.hpp"
 
 Ice::Ice() : AMateria("ice") {
-	std::cout  << "Default constructor for Ice\n";
+	std::cout << "Default constructor for Ice\n";
 }
 
 Ice::~Ice() {
-	std::cout  << "Default destructor for Ice\n";
+	std::cout << "Default destructor for Ice\n";
 }
 
 Ice::Ice(const Ice &other) : AMateria(other) {

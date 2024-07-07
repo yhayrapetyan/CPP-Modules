@@ -17,25 +17,22 @@
 
 typedef std::string string;
 
-class ClapTrap
-{
-	public:
-		ClapTrap(void);
-		~ClapTrap(void);
-		ClapTrap(const ClapTrap &claptrap);
-		ClapTrap& operator=(const ClapTrap &claptrap);
-		ClapTrap(string name);
+class ClapTrap {
+public:
+	ClapTrap(void);
+	~ClapTrap(void);
+	ClapTrap(const ClapTrap &claptrap);
+	ClapTrap &operator=(const ClapTrap &claptrap);
+	ClapTrap(string name);
+	void attack(const string &target);
+	void takeDamage(unsigned int amount);
+	void beRepaired(unsigned int amount);
 
-		void attack(const string& target);
-		void takeDamage(unsigned int amount);
-		void beRepaired(unsigned int amount);
-
-	private:
-		string 	_name;
-		int		_hit;
-		int		_energy;
-		int		_damage;
-		
+private:
+	string _name;
+	int _hit;
+	int _energy;
+	int _damage;
 };
 
 #endif

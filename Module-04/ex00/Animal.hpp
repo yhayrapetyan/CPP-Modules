@@ -5,8 +5,7 @@
 
 typedef std::string string;
 
-class Animal
-{
+class Animal {
 public:
 	Animal();
 	virtual ~Animal();
@@ -17,9 +16,9 @@ public:
 	virtual void makeSound() const;
 	string getType() const;
 
-
 protected:
 	string	_type;
+
 };
 
 #endif
