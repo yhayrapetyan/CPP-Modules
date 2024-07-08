@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:43:25 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/07/08 13:41:38 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/07/08 14:07:49 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ bool Contact::set_fname(string str) {
 		return true;
 	}
 	else {
-		std::cerr << "Error not valid first name\n";
+		std::cout << "Error not valid first name\n";
 		return false;	
 	}
 }
@@ -77,7 +77,7 @@ bool Contact::set_lname(string str) {
 		return true;
 	}
 	else {
-		std::cerr << "Error not valid last name\n";
+		std::cout << "Error not valid last name\n";
 		return false;
 	}
 }
@@ -85,14 +85,8 @@ bool Contact::set_lname(string str) {
 bool Contact::set_nick(string str) {
 	if (str == "")
 		return false;
-	if (isAlpha(str)) {
 		this->_nick = str;
-		return true;
-	}
-	else {
-		std::cerr << "Error not valid nick\n";
-		return false;
-	}
+	return true;
 } 
 
 bool Contact::set_phone_num(string str) {
@@ -103,7 +97,7 @@ bool Contact::set_phone_num(string str) {
 		return true;
 	}
 	else {
-		std::cerr << "Error not valid number\n";
+		std::cout << "Error not valid number\n";
 		return false;
 	}
 }
