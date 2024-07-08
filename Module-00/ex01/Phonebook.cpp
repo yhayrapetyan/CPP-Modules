@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:57:24 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/07/03 18:59:35 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:43:58 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,44 +21,39 @@ Phonebook::~Phonebook(void) {
 	std::cout << "See you soon!" << std::endl;
 }
 
+string	get_input(string prompt) {
+
+	string str = "";
+	
+	std::cout << prompt;
+	std::getline(std::cin, str);
+	return str;
+}
+
 void Phonebook::add(void) {
 	string str;
 
 	str = "";
 	if (this->_index > 7)
 		std::cout << "Warning: overwriting info about " << this->_contacts[this->_index % 8].get_fname() << std::endl;
-	while (!std::cin.eof() && str == "") {
-		std::cout << "Enter a first name: ";
-		if (std::getline(std::cin, str) && str != "")
-			this->_contacts[this->_index % 8].set_fname(str);
-	}
-	str = "";
-	while (!std::cin.eof() && str == "") {
-		std::cout << "Enter last name: ";
-		if (std::getline(std::cin, str) && str != "")
-			this->_contacts[this->_index % 8].set_lname(str);
-	}
-	str = "";
-	while (!std::cin.eof() && str == "") {
-		std::cout << "Enter nickname: ";
-		if (std::getline(std::cin, str) && str != "")
-			this->_contacts[this->_index % 8].set_nick(str);
-	}
-	str = "";
-	while (!std::cin.eof() && str == "") {
-		std::cout << "Enter phone number: ";
-		if (std::getline(std::cin, str) && str != "")
-			this->_contacts[this->_index % 8].set_phone_num(str);
-	}
-	str = "";
-	while (!std::cin.eof() && str == "") {
-		std::cout << "Enter darkest secret: ";
-		if (std::getline(std::cin, str) && str != "") {
-			this->_contacts[this->_index % 8].set_secret(str);
-			std::cout << this->_contacts[this->_index % 8].get_fname() << \
+	while (!std::cin.eof() && \
+			this->_contacts[this->_index % 8].set_fname(get_input("Enter a first name: ")) == false)
+			;
+	while (!std::cin.eof() && \
+			this->_contacts[this->_index % 8].set_lname(get_input("Enter last name: ")) == false)
+			;
+	while (!std::cin.eof() && \
+			this->_contacts[this->_index % 8].set_nick(get_input("Enter nickname: ")) == false)
+			;
+	while (!std::cin.eof() && \
+			this->_contacts[this->_index % 8].set_phone_num(get_input("Enter phone number: ")) == false)
+			;
+	while (!std::cin.eof() && \
+			this->_contacts[this->_index % 8].set_secret(get_input("Enter darkest secret: ")) == false)
+			;
+
+	std::cout << this->_contacts[this->_index % 8].get_fname() << \
                 " successfully added to phonebook [" << this->_index % 8 + 1 << "/8]" << std::endl;
-		}
-	}
 	this->_index++;
 }
 

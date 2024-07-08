@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 11:38:04 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/07/03 18:29:39 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:26:23 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int main(void) {
 	string str;
 
 	while (str != "EXIT") {
+		std::cout << "Enter command: ADD, SEARCH, EXIT;\n";
 		std::getline(std::cin, str);
 		if (str == "ADD")
 			phonebook.add();

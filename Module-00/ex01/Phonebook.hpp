@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 15:56:37 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/07/03 19:17:56 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/07/08 13:49:37 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ public:
 private:
 	Contact	_contacts[8];
 	int		_index;
+
 };
 
-
+string	get_input(string prompt);
 
 #endif
