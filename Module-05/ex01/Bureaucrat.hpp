@@ -6,8 +6,8 @@
 
 typedef std::string string;
 
-#define MIN 1
-#define MAX 150
+#define MIN 150
+#define MAX 1
 
 class Form;
 
@@ -25,13 +25,13 @@ public:
 	void                decrement();
 	void                signForm(Form &f) const;
 
+	class GradeTooHighException : public std::exception { public: char const  *what() const throw(); };
+    class GradeTooLowException : public std::exception  { public: char const  *what() const throw(); };
 
 
 private:
 	string const _name;
 	unsigned int _grade;
-	class GradeTooHighException : public std::exception { public: char const  *what() const throw(); };
-    class GradeTooLowException : public std::exception  { public: char const  *what() const throw(); };
 
 };
 

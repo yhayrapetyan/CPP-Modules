@@ -8,8 +8,7 @@ typedef std::string string;
 #define MIN 150
 #define MAX 1
 
-class Bureaucrat
-{
+class Bureaucrat {
 public:
 	Bureaucrat();
 	Bureaucrat(string const name, int grade);
@@ -21,20 +20,14 @@ public:
 	unsigned int        getGrade() const;
 	void                increment();
 	void                decrement();
+	
+	class GradeTooHighException : public std::exception { public: char const  *what() const throw(); };
+    class GradeTooLowException : public std::exception  { public: char const  *what() const throw(); };
 
 private:
 	string const _name;
 	unsigned int _grade;
 
-	class GradeTooHighException : public std::exception {
-        public:
-			char const  *what() const throw();
-	};
-
-    class GradeTooLowException : public std::exception  {
-        public:
-			char const  *what() const throw();
-	};
 };
 
 std::ostream &operator<<(std::ostream &out, Bureaucrat const &i);

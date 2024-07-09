@@ -35,9 +35,20 @@ int main(void)
 		std::cout << std::endl;
 
 		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Bureaucrat *a = new Bureaucrat("Assistant", 145);
-		Bureaucrat *b = new Bureaucrat("CEO", 1);
-		Form *c = new Form("Rent Contract", 140, 100);
+		// try {
+			Bureaucrat *a = new Bureaucrat("Assistant", 145);
+			Bureaucrat *b = new Bureaucrat("CEO", 1);
+			Form *c = new Form("Rent Contract", 140, 100);
+		// } 
+		// catch (const Bureaucrat::G)
+		// {
+
+		// }
+		// catch	()
+		// {
+
+		// }
+		
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
