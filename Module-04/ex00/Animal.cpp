@@ -9,7 +9,7 @@ Animal::~Animal() {
 	std::cout << "Animal destructor\n";
 }
 
-Animal::Animal(Animal &other) {
+Animal::Animal(const Animal &other) {
 	std::cout << "Animal copy constructor\n";
 	*this = other;
 }

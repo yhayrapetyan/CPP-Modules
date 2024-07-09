@@ -9,11 +9,10 @@ Animal::~Animal() {
 	std::cout << "Animal destructor\n";
 }
 
-Animal::Animal(Animal &other) {
+Animal::Animal(const Animal &other) {
 	std::cout << "Animal copy constructor\n";
 	*this = other;
 }
-
 
 Animal &Animal::operator=(const Animal &other) {
 	std::cout << "Animal copy assign constructor\n";
@@ -27,5 +26,4 @@ Animal::Animal(const string &type) {
 }
 
 string Animal::getType() const { return this->_type; }
-
 void Animal::makeSound() const { std::cout << this->getType() << " says: Animal sound\n"; }

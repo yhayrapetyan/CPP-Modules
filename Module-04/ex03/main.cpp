@@ -132,5 +132,6 @@ int main() {
 
 	ft_tests();
 
+	system("leaks materia");
 	return (0);
 }

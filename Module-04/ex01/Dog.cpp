@@ -10,18 +10,24 @@ Dog::~Dog() {
 	delete this->_brain;
 }
 
-Dog::Dog(Dog &other) : Animal() {
+Dog::Dog(const Dog &other) : Animal(), _brain(new Brain(*other._brain)) {
 	std::cout << "Dog copy constructor\n";
-	*this = other;
 }
 
 Dog &Dog::operator=(const Dog &src) {
-	std::cout << "Dog copy asign constructor\n";
+	std::cout << "Dog copy assign constructor\n";
 	if (this == &src)
 		return *this;
-
-	this->_type = src._type;
+	*_brain = *src._brain;
 	return *this;
 }
 
 void Dog::makeSound() const { std::cout << this->getType() << " says: Bark\n"; }
+
+void Dog::think(string idea, unsigned int i) {
+	this->_brain->set_idea(idea, i);
+}
+
+string	Dog::remember(unsigned int i) {
+	return this->_brain->get_idea(i);
+}

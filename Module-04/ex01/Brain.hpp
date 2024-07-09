@@ -13,10 +13,12 @@ public:
 	Brain &operator=(const Brain &other);
 	~Brain();
 
-	std::string &operator[](unsigned int i);
+	string &operator[](unsigned int i);
+	void	set_idea(string idea, unsigned int	i);
+	string	get_idea(unsigned int i);
 
 protected:
-	string *_ideas;
+	string _ideas[100];
 
 };
 

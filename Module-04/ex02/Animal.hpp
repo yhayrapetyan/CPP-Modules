@@ -5,21 +5,20 @@
 
 typedef std::string string;
 
-class Animal
-{
+class Animal {
 public:
+	Animal();
 	virtual ~Animal();
+	Animal(const Animal &aniaml);
 	Animal &operator=(const Animal &other);
+	Animal(const string& type);
 
-	virtual void makeSound() const;
+	virtual void makeSound() const = 0;
 	string getType() const;
 
 protected:
-	Animal();
-	Animal(Animal &aniaml);
-	Animal(const string& type);
-
 	string	_type;
+
 };
 
 #endif

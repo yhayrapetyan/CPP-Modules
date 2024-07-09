@@ -10,17 +10,24 @@ Cat::~Cat() {
 	delete this->_brain;
 }
 
-Cat::Cat(Cat &other) : Animal() {
+Cat::Cat(const Cat &other) : Animal(), _brain(new Brain(*other._brain)) {
 	std::cout << "Cat copy constructor\n";
-	*this = other;
 }
 
 Cat &Cat::operator=(const Cat &src) {
 	std::cout << "Cat copy assign constructor\n";
 	if (this == &src)
 		return *this;
-	this->_type = src._type;
+	*_brain = *src._brain;
 	return *this;
 }
 
 void Cat::makeSound() const { std::cout << this->getType() << " says: Meow\n"; }
+
+void Cat::think(string idea, unsigned int i) {
+	this->_brain->set_idea(idea, i);
+}
+
+string	Cat::remember(unsigned int i) {
+	return this->_brain->get_idea(i);
+}

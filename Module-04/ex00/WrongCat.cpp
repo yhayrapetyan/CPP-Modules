@@ -1,24 +1,21 @@
 #include "WrongCat.hpp"
 
-// Constructors
 WrongCat::WrongCat() : WrongAnimal() {
 	this->_type = "WrongCat";
-	std::cout << "WrongCat Default Constructor called" << std::endl;
+	std::cout << "WrongCat Default Constructor called\n";
 }
 
 WrongCat::WrongCat(const WrongCat &copy) : WrongAnimal() {
-	std::cout << "WrongCat Copy Constructor called" << std::endl;
+	std::cout << "WrongCat Copy Constructor called\n";
 	*this = copy;
 }
 
-// Deconstructors
 WrongCat::~WrongCat() {
-	std::cout << "WrongCat Deconstructor called" << std::endl;
+	std::cout << "WrongCat Deconstructor called\n";
 }
 
-// Overloaded Operators
 WrongCat &WrongCat::operator=(const WrongCat &src) {
-	std::cout << "WrongCat Assignation operator called" << std::endl;
+	std::cout << "WrongCat Assignation operator called\n";
 	if (this == &src)
 		return *this;
 
@@ -26,7 +23,6 @@ WrongCat &WrongCat::operator=(const WrongCat &src) {
 	return *this;
 }
 
-// Public Methods
 void WrongCat::makeSound(void) const {
-	std::cout << this->getType() << " says: **WrongCat sounds**" << std::endl;
+	std::cout << this->getType() << " says: **WrongCat sounds**\n";
 }

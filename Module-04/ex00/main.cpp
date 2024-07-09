@@ -93,6 +93,6 @@ int main() {
 	std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
 	delete wrong_catta;
 	std::cout << std::endl;
-
+	// system("leaks zoo");
 	return (0);
 }
