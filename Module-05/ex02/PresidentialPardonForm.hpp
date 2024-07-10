@@ -14,7 +14,7 @@ public:
 	PresidentialPardonForm(string const target);
 	PresidentialPardonForm(const PresidentialPardonForm &other);
 	PresidentialPardonForm& operator=(const PresidentialPardonForm &other);
-	virtual ~PresidentialPardonForm();
+	virtual ~PresidentialPardonForm();//check why virtual
 
 	std::string const   getName() const;
 	void                setName(string const target);
