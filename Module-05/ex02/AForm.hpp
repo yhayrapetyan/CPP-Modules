@@ -1,5 +1,5 @@
-#ifndef FORM_H
-# define FORM_H
+#ifndef AFORM_H
+# define AFORM_H
 
 #include "Bureaucrat.hpp"
 #include <iomanip>
@@ -8,27 +8,29 @@ typedef std::string string;
 
 class	Bureaucrat;
 
-class Form  {
+class AForm  {
 public:
-	Form();
-	~Form();
-	Form(string const name, int signed_grade, int executed_grade);
-	Form(const Form &other);
-	Form &operator=(const Form &other);
+	AForm();
+	virtual ~AForm();
+	AForm(string const name, int signed_grade, int executed_grade);
+	AForm(const AForm &other);
+	AForm &operator=(const AForm &other);
 
 	string const   		getName() const;
 	bool                isSigned() const;
-	int                 getSignedGrade() const;
-	int                 getExecutedGrade() const;
+	unsigned int        getSignedGrade() const;
+	unsigned int        getExecutedGrade() const;
 
 	void                setName(string const name);
 	void                setSignedGrade(unsigned int n);
 	void                setExecutedGrade(unsigned int n);
 	void                beSigned(const Bureaucrat &target);
+	virtual void		execute(Bureaucrat const &executor) const;
 
 	class GradeTooHighException : public std::exception {public: char const  *what() const throw();};
 	class GradeTooLowException : public std::exception  {public: char const  *what() const throw();};
 	class SignedException : public std::exception       {public: char const  *what() const throw();};
+	class ExecuteException : public std::exception      {public: char const  *what() const throw();};
 
 private:
 	string const  		 _name;
@@ -38,6 +40,6 @@ private:
 
 };
 
-std::ostream &operator<<(std::ostream &out, Form const &f);
+std::ostream &operator<<(std::ostream &out, AForm const &f);
 
 #endif

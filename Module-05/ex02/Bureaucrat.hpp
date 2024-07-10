@@ -2,14 +2,14 @@
 # define BUREAUCRAT_H
 
 #include <iostream>
-#include "Form.hpp"
+#include "AForm.hpp"
 
 typedef std::string string;
 
 #define MIN 150
 #define MAX 1
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 public:
@@ -24,7 +24,8 @@ public:
 	void				setName(const string name);
 	void                increment();
 	void                decrement();
-	void                signForm(Form &form) const;
+	void                signForm(AForm &form) const;
+	void                executeForm(AForm &form) const;
 
 	class GradeTooHighException : public std::exception { public: char const  *what() const throw(); };
     class GradeTooLowException : public std::exception  { public: char const  *what() const throw(); };
