@@ -12,17 +12,18 @@ class Form  {
 public:
 	Form();
 	~Form();
-	Form(string const name, int sg, int efg);
+	Form(string const name, int signed_grade, int executed_grade);
 	Form(const Form &other);
 	Form &operator=(const Form &other);
 
-	string const   		getFName() const;
-	bool                getFGrade() const;
-	int                 getsgGrade() const;
-	int                 getefgGrade() const;
-	void                setFName(string const name);
-	void                setsgGrade(int n);
-	void                setefgGrade(int n);
+	string const   		getName() const;
+	bool                isSigned() const;
+	int                 getSignedGrade() const;
+	int                 getExecutedGrade() const;
+
+	void                setName(string const name);
+	void                setSignedGrade(unsigned int n);
+	void                setExecutedGrade(unsigned int n);
 	void                beSigned(const Bureaucrat &target);
 
 	class GradeTooHighException : public std::exception {public: char const  *what() const throw();};
@@ -30,10 +31,10 @@ public:
 	class SignedException : public std::exception       {public: char const  *what() const throw();};
 
 private:
-	string const  		 _fname;
+	string const  		 _name;
 	bool                _is_signed;
-	int const           _signed_grade;
-	int const           _executed_fgrade;
+	unsigned int const  _signed_grade;
+	unsigned int const  _executed_grade;
 
 };
 

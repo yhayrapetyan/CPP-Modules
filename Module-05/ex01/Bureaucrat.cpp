@@ -6,32 +6,33 @@ Bureaucrat::Bureaucrat(): _name("default Name") {
 }
 
 Bureaucrat::~Bureaucrat() {
-	std::cout << "Destructor for Bureaucrat "  << this->getName() << "\n";
+	std::cout << "Destructor for Bureaucrat "  << this->_name << "\n";
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other.getName()) {
+Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name) {
     std::cout << "Copy constructor for Bureaucrat\n";
-    if (other.getGrade() > MIN)
+    if (other._grade > MIN)
         throw GradeTooLowException();
-    if (other.getGrade() < MAX)
+    if (other._grade < MAX)
         throw GradeTooHighException();
     if (this != &other)
         *this = other;
 }
 
 Bureaucrat   &Bureaucrat::operator=(const Bureaucrat &other)  {
-    std::cout << "Copy assignment operator called" << std::endl;
+    std::cout << "Copy assignment operator called\n";
     if (this == &other)
         return (*this);
-    if (other.getGrade() > MIN)
+    if (other._grade > MIN)
         throw GradeTooLowException();
-    if (other.getGrade() < MAX)
+    if (other._grade < MAX)
         throw GradeTooHighException();  
-    this->_grade = other.getGrade();
+    this->_grade = other._grade;
+	this->setName(other._name);
     return (*this);
 }
 
-Bureaucrat::Bureaucrat(std::string const str, int grade): _name(str)  {
+Bureaucrat::Bureaucrat(string const str, unsigned int grade): _name(str)  {
     std::cout << "Constructor for " << str << "\n";
     if (grade > MIN)
         throw GradeTooLowException();
@@ -42,6 +43,11 @@ Bureaucrat::Bureaucrat(std::string const str, int grade): _name(str)  {
 
 string const Bureaucrat::getName() const {return (this->_name);}
 unsigned int Bureaucrat::getGrade() const {return (this->_grade);}
+
+void		 Bureaucrat::setName(const string name) {
+	string *tmp = (string *)&_name;
+	*tmp = name;
+};
 
 void    Bureaucrat::increment() {
     std::cout << "Increment\n";
@@ -57,24 +63,24 @@ void    Bureaucrat::decrement() {
     this->_grade += 1;
 }
 
-void    Bureaucrat::signForm(Form &f) const {
-    try
-    {
-        f.beSigned(*this);
-        std::cout << this->_name << " signed " << f.getFName() << "\n";
-    }
-    catch(const std::exception &e)
-    {
-        std::cerr << this->_name << "'s " << e.what() << "\n";
-    }
-}
-
 char	const *Bureaucrat::GradeTooHighException::what() const throw(){
 	return ("Grade is too high!");
 }
 
 char	const *Bureaucrat::GradeTooLowException::what()  const throw(){
 	return ("Grade is too low!");
+}
+
+void    Bureaucrat::signForm(Form &form) const {
+    try
+    {
+        form.beSigned(*this);
+        std::cout << this->_name << " signed " << form.getName() << "\n";
+    }
+    catch(const std::exception &e)
+    {
+        std::cerr << this->_name << "'s " << e.what() << "\n";
+    }
 }
 
 std::ostream &operator<<(std::ostream &out, Bureaucrat const &bur)  {

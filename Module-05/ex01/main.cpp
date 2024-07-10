@@ -10,19 +10,20 @@ int main(void)
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
-		std::cout << b;
-
+		
+		std::cout << *a;
+		std::cout << *b;
+		std::cout << "\n";
 		try
 		{
 			b->beSigned(*a);
 		}
-		catch(Bureaucrat::GradeTooLowException &e)
+		catch(Form::GradeTooLowException &e)
 		{
-			std::cerr << a->getName() << " was not able to sign " << b->getFName() << ": " << e.what() << std::endl;
+			std::cerr << a->getName() << " was not able to sign " << b->getName() << ": " << e.what() << std::endl;
 		}
-
-		std::cout << b;
+		std::cout << "\n";
+		std::cout << *b;
 		std::cout << std::endl;
 
 		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
@@ -30,7 +31,7 @@ int main(void)
 		delete b;
 		std::cout << std::endl;
 	}
-	std::cout << "-------------------------------------------------------" << std::endl;
+	std::cout << "\n\n-------------------------------------------------------" << std::endl;
 	{
 		std::cout << std::endl;
 
@@ -52,9 +53,9 @@ int main(void)
 		std::cout << std::endl;
 
 		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
-		std::cout << b;
-		std::cout << c;
+		std::cout << *a;
+		std::cout << *b;
+		std::cout << *c;
 
 		// Assistant signs the Form
 		try
@@ -64,11 +65,11 @@ int main(void)
 		}
 		catch(Bureaucrat::GradeTooLowException &e)
 		{
-			std::cerr << "\033[33m" << a->getName() << " was not able to sign the Form " << c->getFName() << ": " << e.what() << "\033[0m" << std::endl;
+			std::cerr << "\033[33m" << a->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
 
 		// CEO signs the Form
-		std::cout << c;
+		std::cout << *c;
 		try
 		{
 			c->beSigned(*b);
@@ -76,7 +77,7 @@ int main(void)
 		}
 		catch(Bureaucrat::GradeTooLowException &e)
 		{
-			std::cerr << "\033[33m" << b->getName() << " was not able to sign the Form " << c->getFName() << ": " << e.what() << "\033[0m" << std::endl;
+			std::cerr << "\033[33m" << b->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
 		}
 		std::cout << c;
 

@@ -18,6 +18,7 @@ public:
 
 	string const   		getName() const;
 	unsigned int        getGrade() const;
+	void				setName(const string name);
 	void                increment();
 	void                decrement();
 	

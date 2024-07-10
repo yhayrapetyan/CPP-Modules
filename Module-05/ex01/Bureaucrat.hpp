@@ -14,16 +14,17 @@ class Form;
 class Bureaucrat {
 public:
 	Bureaucrat();
-	Bureaucrat(string const name, int grade);
+	Bureaucrat(string const name, unsigned int grade);
 	Bureaucrat(const Bureaucrat &other);
 	Bureaucrat &operator=(const Bureaucrat &other);
 	~Bureaucrat();
 
 	string const   		getName() const;
 	unsigned int        getGrade() const;
+	void				setName(const string name);
 	void                increment();
 	void                decrement();
-	void                signForm(Form &f) const;
+	void                signForm(Form &form) const;
 
 	class GradeTooHighException : public std::exception { public: char const  *what() const throw(); };
     class GradeTooLowException : public std::exception  { public: char const  *what() const throw(); };

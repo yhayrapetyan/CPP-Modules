@@ -1,64 +1,79 @@
 #include "Form.hpp"
 
-Form::Form() :
-				_signed_grade(20),
-				_executed_fgrade(8) {
-	this->_is_signed = false;
+Form::Form()
+	:
+	_name("Unkown contract"),
+	_is_signed(false),
+	_signed_grade(20),
+	_executed_grade(8)
+{
 	std::cout << "Default constructor for Form\n";
 }
 
 Form::~Form() {
-	std::cout << "Destructor for Form " << this->getFName() << "\n";
+	std::cout << "Destructor for Form " << this->_name << "\n";
 }
 
-Form::Form(const Form &other) :
-								_fname(other.getFName()),
-								_signed_grade(other.getsgGrade()),
-								_executed_fgrade(other.getefgGrade()) {
+Form::Form(const Form &other)
+	:
+	_name(other._name),
+	_is_signed(other._is_signed),
+	_signed_grade(other._signed_grade),
+	_executed_grade(other._executed_grade)
+{
     std::cout << "Copy constructor called\n";
-    if (this->_signed_grade > MIN || this->_executed_fgrade > MIN)
+    if (this->_signed_grade > MIN || this->_executed_grade > MIN)
         throw GradeTooLowException();
-    if (this->_signed_grade < MAX || this->_executed_fgrade < MAX)
+    if (this->_signed_grade < MAX || this->_executed_grade < MAX)
         throw GradeTooHighException();
     if (this != &other)
         *this = other;
 }
 
 Form   &Form::operator=(const Form &other)  {
-    std::cout << "Copy assignment operator called for " << this->getFName() << "\n";
+    std::cout << "Copy assignment operator called for " << this->_name << "\n";
     if (this == &other)
         return (*this);
-    if (this->_signed_grade > MIN || this->_executed_fgrade > MIN)
+    if (this->_signed_grade > MIN || this->_executed_grade > MIN)
         throw GradeTooLowException();
-    if (this->_signed_grade < MAX || this->_executed_fgrade < MAX)
+    if (this->_signed_grade < MAX || this->_executed_grade < MAX)
         throw GradeTooHighException();
-    setFName(other.getFName());
-    this->_is_signed = other.getFGrade();
-    setsgGrade(other.getsgGrade());
-    setefgGrade(other.getefgGrade());
+    this->setName(other._name);
+    this->_is_signed = other._is_signed;
+    this->setSignedGrade(other._signed_grade);
+    this->setExecutedGrade(other._executed_grade);
     return (*this);
 }
 
-Form::Form(string const str, int sg, int efg): 
-			_fname(str), 
-			_signed_grade(sg), 
-			_executed_fgrade(efg)  {
+Form::Form(string const str, int signed_grade, int executed_grade): 
+			_name(str), 
+			_signed_grade(signed_grade), 
+			_executed_grade(executed_grade)  {
     std::cout << "Constructor for Form " << str << "\n";
     this->_is_signed = false;
-    if (sg > MIN || efg > MIN)
+    if (signed_grade > MIN || executed_grade > MIN)
         throw GradeTooLowException();
-    if (sg < MAX || efg < MAX)
+    if (signed_grade < MAX || executed_grade < MAX)
         throw GradeTooHighException();    
 }
 
-string const 	  Form::getFName()   const {return (this->_fname);}
-bool              Form::getFGrade()  const {return (this->_is_signed);}
-int               Form::getsgGrade() const {return (this->_signed_grade);}
-int               Form::getefgGrade()const {return (this->_executed_fgrade);}
+string const 	  Form::getName()   const {return (this->_name);}
+bool              Form::isSigned()  const {return (this->_is_signed);}
+int               Form::getSignedGrade() const {return (this->_signed_grade);}
+int               Form::getExecutedGrade() const {return (this->_executed_grade);}
 
-void              Form::setFName(string const name)    {string *tmp = (std::string *)&_fname; *tmp = name;}
-void              Form::setsgGrade(int n)              {int *tmp = (int *)&_signed_grade;          *tmp = n;}
-void              Form::setefgGrade(int n)             {int *tmp = (int *)&_executed_fgrade;       *tmp = n;}
+void	Form::setName(string const name) {
+	string *tmp = (string *)&_name;
+	*tmp = name;
+}
+void	Form::setSignedGrade(unsigned int n) {
+	unsigned int *tmp = (unsigned int *)&_signed_grade;
+	*tmp = n;
+}
+void	Form::setExecutedGrade(unsigned int n) {
+	unsigned int *tmp = (unsigned int *)&_executed_grade;
+	*tmp = n;
+}
 
 char        const *Form::GradeTooHighException::what() const throw(){return ("Form grade is too high");}
 char        const *Form::GradeTooLowException::what()  const throw(){return ("Form grade is too low");}
@@ -67,7 +82,7 @@ char        const *Form::SignedException::what()       const throw(){return ("Fo
 void    Form::beSigned(const Bureaucrat &target)  {
     if (this->_is_signed)
         throw SignedException();
-    if (static_cast<int>(target.getGrade()) <= this->_signed_grade)
+    if (target.getGrade() <= this->_signed_grade)
         this->_is_signed = true;
     else
         throw GradeTooLowException();
@@ -76,12 +91,12 @@ void    Form::beSigned(const Bureaucrat &target)  {
 std::ostream &operator<<(std::ostream &out, Form const &f)  {
     const int wh = 15;
 
-    out << "Form " << f.getFName() << " Bureaucrat ";
-    if (f.getFGrade())
+    out << "Form " << f.getName() << " Bureaucrat ";
+    if (f.isSigned())
         out << "✅ | ";
     else
         out << "❌ | ";
-    out << std::setw(wh) << std::right << "Signed grade: " << std::setw(3) << f.getsgGrade() << " | ";
-    out << std::setw(wh) << std::right << "Executed grade: " << std::setw(3) << f.getefgGrade() << " |\n";
+    out << std::setw(wh) << std::right << "Signed grade: " << std::setw(3) << f.getSignedGrade() << " | ";
+    out << std::setw(wh) << std::right << "Executed grade: " << std::setw(3) << f.getExecutedGrade() << " |\n";
     return (out);
 }
