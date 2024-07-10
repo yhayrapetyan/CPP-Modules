@@ -11,7 +11,7 @@ typedef std::string string;
 class Bureaucrat {
 public:
 	Bureaucrat();
-	Bureaucrat(string const name, int grade);
+	Bureaucrat(string const name, unsigned int grade);
 	Bureaucrat(const Bureaucrat &other);
 	Bureaucrat &operator=(const Bureaucrat &other);
 	~Bureaucrat();

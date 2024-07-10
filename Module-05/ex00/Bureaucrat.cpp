@@ -20,7 +20,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other.getName()) {
 }
 
 Bureaucrat   &Bureaucrat::operator=(const Bureaucrat &other)  {
-    std::cout << "Copy assignment operator called" << std::endl;
+    std::cout << "Copy assignment operator called\n";
     if (this == &other)
         return (*this);
     if (other.getGrade() > MIN)
@@ -31,7 +31,7 @@ Bureaucrat   &Bureaucrat::operator=(const Bureaucrat &other)  {
     return (*this);
 }
 
-Bureaucrat::Bureaucrat(std::string const str, int grade): _name(str)  {
+Bureaucrat::Bureaucrat(string const str, unsigned int grade): _name(str)  {
     std::cout << "Constructor for " << str << "\n";
     if (grade > MIN)
         throw GradeTooLowException();
