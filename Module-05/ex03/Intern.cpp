@@ -32,7 +32,7 @@ AForm   *shruberryForm(const string& target) {
 }
 
 AForm   *Intern::makeForm(string form_name, string target) const {
-    const string fname[] = {
+    const string fname[] = { //need to change fnames
         "PresidentialPardonForm",
         "RobotomyRequestForm",
         "ShrubberyCreationForm"
