@@ -5,6 +5,8 @@
 #include <cstdlib>
 #include <cmath>
 #include <sstream>
+#include <iomanip>
+#include <limits>
 
 typedef std::string string;
 
@@ -30,7 +32,7 @@ private:
 	static void convertFloat(const string& str);
 	static void convertDouble(const string& str);
 
-	static bool check_limits(const string &str)
+	static bool check_limits(const string &str);
 
 };
 
