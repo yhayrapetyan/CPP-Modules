@@ -4,8 +4,7 @@
 #include <iostream>
 #include <cstdlib>
 
-template <class T> class Array
-{
+template <class T> class Array {
 public:
 	Array();
 	Array(unsigned int n);

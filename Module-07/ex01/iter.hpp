@@ -3,8 +3,7 @@
 
 #include <iostream>
 
-template <typename T> void iter (T *a, size_t l, void (*f)(T&))
-{
+template <typename T> void iter (T *a, size_t l, void (*f)(T&)) {
 	if (a == NULL || f == NULL)
 		return;
     for (size_t i = 0; i < l; i++)
