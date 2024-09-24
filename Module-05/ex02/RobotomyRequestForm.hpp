@@ -17,10 +17,9 @@ public:
 	virtual ~RobotomyRequestForm();
 
 	string const   		getName() const;
-	void                setName(string const target);
 	virtual void        execute(Bureaucrat const &executor) const;
 
 private:
-	string const _target;
+	string _target;
 };
 #endif

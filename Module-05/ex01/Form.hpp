@@ -21,9 +21,6 @@ public:
 	int                 getSignedGrade() const;
 	int                 getExecutedGrade() const;
 
-	void                setName(string const name);
-	void                setSignedGrade(unsigned int n);
-	void                setExecutedGrade(unsigned int n);
 	void                beSigned(const Bureaucrat &target);
 
 	class GradeTooHighException : public std::exception {public: char const  *what() const throw();};

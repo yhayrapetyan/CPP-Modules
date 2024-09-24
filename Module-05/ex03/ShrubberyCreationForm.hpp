@@ -18,13 +18,12 @@ public:
 	virtual ~ShrubberyCreationForm();
 
 	std::string const   getName() const;
-	void                setName(string const target);
 	virtual void        execute(Bureaucrat const &executor) const;
 
 	class SCFException : public std::exception {public: virtual char const  *what() const throw();};
 
 private:
-	string const _target;
+	string _target;
 
 };
 

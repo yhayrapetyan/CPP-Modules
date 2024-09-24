@@ -3,15 +3,19 @@
 Character::Character() {
 	this->_name = "unknown character";
 	this->_size = 0;
+	for (int i = 0; i < 4; i++)
+		this->_inventory[i] = NULL;
 	std::cout << "Default constructor for Character [" << this->_name << "]\n";
 }
 
 Character::~Character() {
 	std::cout << "Destructor for Character" << this->_name << "\n";
-//	for (int i = 0; i < 4; i++)//idk about this
-//		this->_inventory[i] = NULL;
-	for (int i = 0; i < this->_size; i++)
-		delete this->_inventory[i];
+	for (int i = 0; i < this->_size; i++) {
+		if (this->_inventory[i]) {
+			delete this->_inventory[i];
+			this->_inventory[i] = NULL;
+		}
+	}
 }
 
 Character::Character(const Character &other) {
@@ -64,7 +68,7 @@ void Character::unequip(int i) {
 	if (i >= 0 && i < this->_size) {
 		if (i < this->_size) {
 			std::cout << "[" << this->_name << "]" << " unequipped from inventory index [" << i << "]\n";
-//			delete this->_inventory[i];
+			delete this->_inventory[i];
 			while (this->_inventory[i + 1]) {
 				this->_inventory[i] = this->_inventory[i + 1];
 				i++;

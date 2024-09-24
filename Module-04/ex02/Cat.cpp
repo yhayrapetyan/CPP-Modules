@@ -6,19 +6,21 @@ Cat::Cat() : Animal("Cat") {
 }
 
 Cat::~Cat() {
-	std::cout << "Cat destructor\n";
 	delete this->_brain;
+	std::cout << "Cat destructor\n";
 }
 
-Cat::Cat(const Cat &other) : Animal(), _brain(new Brain(*other._brain)) {
+Cat::Cat(const Cat &other) : Animal(other) {
 	std::cout << "Cat copy constructor\n";
+	this->_brain = new Brain(*other._brain);
 }
 
 Cat &Cat::operator=(const Cat &src) {
 	std::cout << "Cat copy assign constructor\n";
 	if (this == &src)
 		return *this;
-	*_brain = *src._brain;
+	delete this->_brain;
+	this->_brain =  new Brain(*src._brain);
 	return *this;
 }
 

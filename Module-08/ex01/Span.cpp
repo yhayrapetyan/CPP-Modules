@@ -34,13 +34,9 @@ int     Span::shortestSpan() const	{
 		throw std::logic_error("Error shortest span stop working");
 
 	Span::container_type _copy = this->_span;
-	
 	int _elem = _copy.top();
-
 	_copy.pop();
-
 	int	_min = std::abs(_elem - _copy.top());
-
 	while (!_copy.empty())
 	{
 		_elem = _copy.top();
@@ -55,8 +51,6 @@ int     Span::longestSpan() const	{
 	if (this->_span.size() < 2)
 		throw std::logic_error("Error longest span stop working");
 	Span::container_type _copy = this->_span;
-
-
 	while (_copy.size() > 1)
 	{
 		_copy.pop();

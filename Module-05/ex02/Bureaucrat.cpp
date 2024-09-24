@@ -11,24 +11,13 @@ Bureaucrat::~Bureaucrat() {
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other) : _name(other._name) {
     std::cout << "Copy constructor for Bureaucrat\n";
-    if (other._grade > MIN)
-        throw GradeTooLowException();
-    if (other._grade < MAX)
-        throw GradeTooHighException();
-    if (this != &other)
-        *this = other;
 }
 
 Bureaucrat   &Bureaucrat::operator=(const Bureaucrat &other)  {
     std::cout << "Copy assignment operator called\n";
     if (this == &other)
         return (*this);
-    if (other._grade > MIN)
-        throw GradeTooLowException();
-    if (other._grade < MAX)
-        throw GradeTooHighException();  
     this->_grade = other._grade;
-	this->setName(other._name);
     return (*this);
 }
 
@@ -44,10 +33,6 @@ Bureaucrat::Bureaucrat(string const str, unsigned int grade): _name(str)  {
 string const Bureaucrat::getName() const {return (this->_name);}
 unsigned int Bureaucrat::getGrade() const {return (this->_grade);}
 
-void		 Bureaucrat::setName(const string name) {
-	string *tmp = (string *)&_name;
-	*tmp = name;
-};
 
 void    Bureaucrat::increment() {
     std::cout << "Increment\n";

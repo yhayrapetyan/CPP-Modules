@@ -22,26 +22,13 @@ AForm::AForm(const AForm &other)
 	_executed_grade(other._executed_grade)
 {
     std::cout << "Copy constructor called\n";
-    if (this->_signed_grade > MIN || this->_executed_grade > MIN)
-        throw GradeTooLowException();
-    if (this->_signed_grade < MAX || this->_executed_grade < MAX)
-        throw GradeTooHighException();
-    if (this != &other)
-        *this = other;
 }
 
 AForm   &AForm::operator=(const AForm &other)  {
     std::cout << "Copy assignment operator called for " << this->_name << "\n";
     if (this == &other)
         return (*this);
-    if (this->_signed_grade > MIN || this->_executed_grade > MIN)
-        throw GradeTooLowException();
-    if (this->_signed_grade < MAX || this->_executed_grade < MAX)
-        throw GradeTooHighException();
-    this->setName(other._name);
     this->_is_signed = other._is_signed;
-    this->setSignedGrade(other._signed_grade);
-    this->setExecutedGrade(other._executed_grade);
     return (*this);
 }
 
@@ -62,18 +49,6 @@ bool              AForm::isSigned()  const {return (this->_is_signed);}
 unsigned int      AForm::getSignedGrade() const {return (this->_signed_grade);}
 unsigned int      AForm::getExecutedGrade() const {return (this->_executed_grade);}
 
-void	AForm::setName(string const name) {
-	string *tmp = (string *)&_name;
-	*tmp = name;
-}
-void	AForm::setSignedGrade(unsigned int n) {
-	unsigned int *tmp = (unsigned int *)&_signed_grade;
-	*tmp = n;
-}
-void	AForm::setExecutedGrade(unsigned int n) {
-	unsigned int *tmp = (unsigned int *)&_executed_grade;
-	*tmp = n;
-}
 
 char        const *AForm::GradeTooHighException::what() const throw(){return ("AForm grade is too high");}
 char        const *AForm::GradeTooLowException::what()  const throw(){return ("AForm grade is too low");}

@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 12:08:15 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/07/04 14:28:46 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/09/16 13:34:38 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void Account::displayStatus(void) {
 	Account::_displayTimestamp();
 	std::cout << "index:" << this->_index;
 	std::cout << ";amount:" << this->_amount;
-	std::cout << ";deposits" << this->_depositsNb;
+	std::cout << ";deposits:" << this->_depositsNb;
 	std::cout << ";withdrawals:" << this->_withdrawalsNb << std::endl;
 }
 

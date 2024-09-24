@@ -9,8 +9,10 @@ MateriaSource::MateriaSource() {
 
 MateriaSource::~MateriaSource() {
 	std::cout << "Destructor for MateriaSource\n";
-	for (int i = 0; i < this->_size; ++i)
+	for (int i = 0; i < this->_size; ++i) {
 		delete this->_materias[i];
+		this->_materias[i] = NULL;
+	}
 }
 
 MateriaSource::MateriaSource(const MateriaSource &other) {

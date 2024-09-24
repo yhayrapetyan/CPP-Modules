@@ -21,11 +21,8 @@ public:
 	unsigned int        getSignedGrade() const;
 	unsigned int        getExecutedGrade() const;
 
-	void                setName(string const name);
-	void                setSignedGrade(unsigned int n);
-	void                setExecutedGrade(unsigned int n);
 	void                beSigned(const Bureaucrat &target);
-	virtual void		execute(Bureaucrat const &executor) const;
+	virtual void		execute(Bureaucrat const &executor) const = 0;
 
 	class GradeTooHighException : public std::exception {public: char const  *what() const throw();};
 	class GradeTooLowException : public std::exception  {public: char const  *what() const throw();};

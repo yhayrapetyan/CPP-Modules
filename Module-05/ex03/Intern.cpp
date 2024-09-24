@@ -32,10 +32,10 @@ AForm   *shruberryForm(const string& target) {
 }
 
 AForm   *Intern::makeForm(string form_name, string target) const {
-    const string fname[] = { //need to change fnames
-        "PresidentialPardonForm",
-        "RobotomyRequestForm",
-        "ShrubberyCreationForm"
+    const string fname[] = {
+        "presidential pardon",
+        "robotomy request",
+        "shrubbery creation"
     };
     AForm* (*form[])(const string&) = {&presidentForm, &robotForm, &shruberryForm};
     size_t num = sizeof(fname) / sizeof(fname[0]);
@@ -43,10 +43,8 @@ AForm   *Intern::makeForm(string form_name, string target) const {
     for (size_t i = 0; i < num; ++i) {
         if (form_name == fname[i]) {
 			return form[i](target);
-            // TakeForm creator = form[i];
-            // return creator(target);
         }
     }
     std::cout << "Intern didn't do the : " << form_name << "\n";
-    return (0);
+    return (NULL);
 }

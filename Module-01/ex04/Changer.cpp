@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 18:39:31 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/07/04 19:25:23 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/09/16 15:27:33 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ void Changer::replace(string to_change, string value) {
 	if (getline(infile, content, '\0')) {
 		std::ofstream outfile(this->_filename + ".replace");
 		while (1) {
+			if (to_change == "") {
+				break;
+			}
 			pos = content.find(to_change, i);
 			if (pos == std::string::npos)
 				break;

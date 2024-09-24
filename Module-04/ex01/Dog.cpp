@@ -6,19 +6,21 @@ Dog::Dog() : Animal("Dog") {
 }
 
 Dog::~Dog() {
-	std::cout << "Dog destructor\n";
 	delete this->_brain;
+	std::cout << "Dog destructor\n";
 }
 
-Dog::Dog(const Dog &other) : Animal(), _brain(new Brain(*other._brain)) {
+Dog::Dog(const Dog &other) : Animal(other){
 	std::cout << "Dog copy constructor\n";
+	this->_brain = new Brain(*other._brain);
 }
 
 Dog &Dog::operator=(const Dog &src) {
 	std::cout << "Dog copy assign constructor\n";
 	if (this == &src)
 		return *this;
-	*_brain = *src._brain;
+	delete this->_brain;
+	this->_brain =  new Brain(*src._brain);
 	return *this;
 }
 

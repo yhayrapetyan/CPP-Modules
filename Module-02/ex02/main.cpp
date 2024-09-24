@@ -6,7 +6,7 @@
 /*   By: yuhayrap <yuhayrap@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:29:06 by yuhayrap          #+#    #+#             */
-/*   Updated: 2024/07/05 17:22:29 by yuhayrap         ###   ########.fr       */
+/*   Updated: 2024/09/16 17:03:05 by yuhayrap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ int main(void) {
 
 	std::cout << "\nTesting increment/decrement:" << std::endl;
 	std::cout << "a: " << a << " (expected: 0)" << std::endl;
-	std::cout << "++a: " << ++a << " (expected: 1)" << std::endl;
-	std::cout << "a: " << a << " (expected: 1)" << std::endl;
-	std::cout << "a++: " << a++ << " (expected: 1)" << std::endl;
-	std::cout << "a: " << a << " (expected: 2)" << std::endl;
-	std::cout << "--a: " << --a << " (expected: 1)" << std::endl;
-	std::cout << "a: " << a << " (expected: 1)" << std::endl;
-	std::cout << "a--: " << a-- << " (expected: 1)" << std::endl;
-	std::cout << "a: " << a << " (expected: 0)" << std::endl;
+	std::cout << "++a: " << ++a  << std::endl;
+	std::cout << "a: " << a << std::endl;
+	std::cout << "a++: " << a++ << std::endl;
+	std::cout << "a: " << a  << std::endl;
+	std::cout << "--a: " << --a << std::endl;
+	std::cout << "a: " << a <<  std::endl;
+	std::cout << "a--: " << a-- << std::endl;
+	std::cout << "a: " << a << std::endl;
 
 	std::cout << "\nTesting arithmetic operators:" << std::endl;
 	std::cout << "c + e: " << (c + e) << " (expected: 12.50)" << std::endl;
