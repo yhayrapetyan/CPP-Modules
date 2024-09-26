@@ -12,7 +12,8 @@ public:
 	Array &operator=(const Array &other);
 	~Array();
 
-	T &operator[](int i) const;
+	T &operator[](size_t i) const;
+	const T& operator[](size_t i) const;
 	int  size() const;
 
 	class except : public std::exception  {char const *what() const throw();};
