@@ -6,7 +6,11 @@
 template <typename T>
 
 typename T::iterator easyfind(T &container, int i) {
-	return (std::find(container.begin(), container.end(), i));
+	typename T::iterator item = std::find(container.begin(), container.end(), i);
+
+	if (item == container.end())
+		throw std::out_of_range("Can't find Occurrence: " + std::to_string(i));
+	return (item);
 }
 
 #endif

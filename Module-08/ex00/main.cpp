@@ -39,7 +39,6 @@ int	main(void)
         std::cout << CYAN << " " << *it;
     std::set<int>::iterator s = easyfind(set, a);
     std::cout << MAGENTA << " Is " << a <<  " in the set: " << GREEN << (s != set.end() ? "yes" : "no") << RESET;
-
     std::cout << std::endl << YELLOW << "====================== LISTS ======================" << std::endl;
 
     std::cout << MAGENTA << "List:";
@@ -69,6 +68,11 @@ int	main(void)
     std::cout << MAGENTA << "Non:";
     for (std::vector<int>::iterator it = vector.begin(); it != vector.end(); it++)
         std::cout << CYAN << " " << *it;
-    std::vector<int>::iterator n = easyfind(vector, f);
-    std::cout << MAGENTA << " Is " << f <<  " in the vector: " << RED << (n != vector.end() ? "yes" : "no") << RESET << std::endl;
+	try {
+    	std::cout << MAGENTA << " Is " << f <<  " in the vector: \n" << RESET;
+    	easyfind(vector, f);
+	}catch(const std::exception &e)
+	{
+		std::cout << RED << e.what() << "\n" << RESET;
+	}
 }
