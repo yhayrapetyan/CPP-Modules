@@ -34,7 +34,7 @@ template <typename T>   Array<T>::Array(unsigned int n) : _size(n) {
 	_array = new T[_size]();
 }
 
-template <typename T>   T &Array<T>::operator[](size_t i) const  {
+template <typename T>   T &Array<T>::operator[](size_t i)  {
     if (i < 0 || i > size() - 1)
         throw Array<T>::except();
     return _array[i];
@@ -46,7 +46,7 @@ template <typename T>  const T &Array<T>::operator[](size_t i) const  {
     return _array[i];
 }
 
-template <typename T>   int  Array<T>::size() const {return _size;}
+template <typename T>   size_t  Array<T>::size() const {return _size;}
 template <typename T>   char const* Array<T>::except::what() const throw()  {return ("Out of range");}
 
 
