@@ -4,17 +4,14 @@ Span::Span()  : _size(0) {}
 Span::~Span() {}
 
 Span::Span(unsigned int N) : _size(N) {
-	// this->_span.reserve(N);
 }
 
 Span::Span(const Span &copy) : _size(copy._size), _span(copy._span) {
-	// this->_span.reserve(copy._span.capacity());
-	// this->_span = copy._span;
+
 }
 
 Span	&Span::operator=(const Span &other) {
 	if (this != &other) {
-		// this->_span.reserve(other._span.capacity());
 		this->_span = other._span;
 		this->_size = other._size;
 	}
