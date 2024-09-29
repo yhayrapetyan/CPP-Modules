@@ -23,10 +23,9 @@ public:
 	int     shortestSpan() const;
 	int     longestSpan() const;
 
-	template <class T> void    addNumber(T start, T end);
+	template <typename It> void    addNumber(It start, It end);
 
 private:
-	// std::vector<int>    _vec;
 	size_t _size;
 	container_type    _span;
 };

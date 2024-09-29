@@ -23,7 +23,7 @@ Span	&Span::operator=(const Span &other) {
 
 void    Span::addNumber(int n)	{
 	if (this->_span.size() == this->_size)
-		throw std::overflow_error("Error add number stop working");
+		throw std::overflow_error("Error add number overflow");
 	this->_span.push(n);
 }
 
@@ -31,7 +31,7 @@ void    Span::addNumber(int n)	{
 int     Span::shortestSpan() const	{
 
 	if (_span.size() < 2)
-		throw std::logic_error("Error shortest span stop working");
+		throw std::logic_error("Error span size less than 2");
 
 	Span::container_type _copy = this->_span;
 	int _elem = _copy.top();
@@ -49,7 +49,7 @@ int     Span::shortestSpan() const	{
 
 int     Span::longestSpan() const	{
 	if (this->_span.size() < 2)
-		throw std::logic_error("Error longest span stop working");
+		throw std::logic_error("Error span size less than 2");
 	Span::container_type _copy = this->_span;
 	while (_copy.size() > 1)
 	{
@@ -59,33 +59,3 @@ int     Span::longestSpan() const	{
 	return _copy.top() - _span.top();
 	
 }
-
-// void    Span::addNumber(int n)	{
-// 	if (this->_span.size() == this->_span.capacity())
-// 		throw std::overflow_error("✅Error add number stop working");
-// 	this->_span.push_back(n);
-// 	std::sort(_span.begin(), _span.end());
-// }
-
-// int     Span::shortestSpan() const	{
-// 	int	min;
-
-// 	if (_span.size() < 2)
-// 		throw std::logic_error("Error shortest span stop working");
-	
-// 	std::vector<int> tmp = this->_span;
-// 	std::sort(tmp.begin(), tmp.end());
-// 	min = tmp[1] - tmp[0];
-// 	for (size_t i = 2; i < tmp.size(); i++)
-// 	{
-// 		if (min > tmp[i] - tmp[i - 1])
-// 			min = tmp[i] - tmp[i - 1];
-// 	}
-// 	return (min);
-// }
-
-// template <class T> void    addNumber(T start, T end)
-// {
-// 	for (; start != end; start++)
-// 		this->addNumber(*end);
-// }
