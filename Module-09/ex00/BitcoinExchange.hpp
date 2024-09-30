@@ -21,7 +21,7 @@ class BitcoinExchange {
 
     private:
 		enum Months {
-			January,
+			January = 1,
 			February,
 			March,
 			April,

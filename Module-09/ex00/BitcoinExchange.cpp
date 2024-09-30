@@ -1,4 +1,5 @@
 #include "BitcoinExchange.hpp"
+#include <iostream>
 
 BitcoinExchange::BitcoinExchange(){};
 BitcoinExchange::~BitcoinExchange(){};
@@ -32,7 +33,7 @@ BitcoinExchange::BitcoinExchange(const std::string &filename): _input(filename) 
         }
 
 		std::string     date = line.substr(0, delim_position);
-		if (!this->isValidDateFormat(date)) {
+		if (!this->isValidDateFormat(date)|| !isValidDate(date)) {
 			std::cout << "Error: not valid date: " << date << "\n";
 			exit(1);
 		}
@@ -83,7 +84,7 @@ bool BitcoinExchange::isValidDate(const std::string &date)  {
     if (sscanf(date.c_str(), "%4d-%2d-%2d", &year, &month, &day) != 3) {
         return false;
     }
-    if (month < 1 || month > 12 || day < 1) {
+    if (month < 1 || month > 12 || day < 1 || year == 0) {
         return false;
     }
     switch (month) {
@@ -128,7 +129,6 @@ void    BitcoinExchange::exchange()   {
         std::cout << "Error: invalid or missing input file header\n";
         exit(1);
     }
-
 	while (getline(infile, line))
 	{
 		if (line.empty())
@@ -162,10 +162,9 @@ void    BitcoinExchange::exchange()   {
 			}
 
 			std::map<std::string, double>::iterator current_price = this->_database.lower_bound(data);
-            if (current_price == this->_database.end())
+			if (current_price == this->_database.end()) {
                 --current_price;
-            else
-            {
+			} else if (current_price != this->_database.begin()){
                 std::map<std::string, double>::iterator prevIt = current_price;
                 --prevIt;
                 // --current_price;
