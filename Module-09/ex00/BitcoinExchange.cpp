@@ -44,7 +44,11 @@ BitcoinExchange::BitcoinExchange(const std::string &filename): _input(filename) 
 			exit(1);
 		}
 
-		double          price = std::strtod(price_value.c_str(), NULL);
+		double          price = stringToDouble(price_value);
+		if (price < 0) {
+			std::cout << "Error: price can't be negative value\n";
+			exit(1);
+		}
 		this->_database[date] = price;
     }
     datafile.close();
