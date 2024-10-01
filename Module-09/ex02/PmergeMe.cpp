@@ -4,6 +4,8 @@
 
 static bool chekcOverflow(char  *line)
 {
+	if (std::strlen(line) > 11)
+		return (true);
 	long	nbr = std::atol(line);
 	return (nbr > INT_MAX || nbr < INT_MIN);
 }
