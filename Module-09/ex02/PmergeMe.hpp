@@ -9,9 +9,6 @@
 #include <ctime>
 #include <stack>
 
-// std::vector<int> fordJohnsonSort(std::vector<int> &arr);
-// std::deque<int> fordJohnsonSort(std::deque<int> &arr);
-
 class PmergeMe
 {
 
