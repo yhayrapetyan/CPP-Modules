@@ -4,7 +4,7 @@ CC = c++
 RM = rm -f
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address
 
-NAME = btc
+NAME = RPN
 
 all: $(NAME)
 

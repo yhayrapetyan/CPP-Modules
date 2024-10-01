@@ -12,12 +12,12 @@ public:
 	Calculator(const Calculator &copy);
 	Calculator &operator=(const Calculator &other);
 	~Calculator();
-	// static int  calcule(const std::string &str);
+	static int  calculate(std::string &str);
 
 private:
-	static bool isop(const std::string &token);
-	static bool isValidInput(const std::string &str);
-	// static int  operation(int num1, int num2, const std::string &op);
+	static bool isOperation(char token);
+	static bool isValidInput(std::string &str);
+	static int  operation(int num1, int num2, char op);
 };
 
 #endif
