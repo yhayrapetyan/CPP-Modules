@@ -1,5 +1,12 @@
 #include "PmergeMe.hpp"
+#include <climits>
 #include <deque>
+
+static bool chekcOverflow(char  *line)
+{
+	long	nbr = std::atol(line);
+	return (nbr > INT_MAX || nbr < INT_MIN);
+}
 
 void PmergeMe::print(int ac, char **av)
 {
@@ -10,6 +17,10 @@ void PmergeMe::print(int ac, char **av)
 		line = av[i];
 		if (line.find(" ") != std::string::npos) {
 			std::cout << "Error: input shouldn't contain spaces\n";
+			exit(1);
+		}
+		if (chekcOverflow(av[i])) {
+			std::cout  << "Error: overflow " << av[i] << "\n";
 			exit(1);
 		}
         int num = std::atoi(av[i]);
