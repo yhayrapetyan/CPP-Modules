@@ -48,7 +48,6 @@ Container merge(const Container& left, const Container& right) {
     return result;
 }
 
-// The Ford-Johnson sorting algorithm (merge-insertion sort) with templates
 template <typename Container>
 Container fordJohnsonSort(Container& cont) {
     if (cont.size() <= 1) {

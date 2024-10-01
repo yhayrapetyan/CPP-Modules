@@ -1,10 +1,17 @@
 #include "PmergeMe.hpp"
+#include <deque>
 
 void PmergeMe::print(int ac, char **av)
 {
-	std::vector<int> vector_arr;
+	std::vector<int> 	vector_arr;
+	std::string			line;
 
 	for (int i = 1; i < ac; ++i) {
+		line = av[i];
+		if (line.find(" ") != std::string::npos) {
+			std::cout << "Error: input shouldn't contain spaces\n";
+			exit(1);
+		}
         int num = std::atoi(av[i]);
         if (num <= 0)
         {
@@ -13,23 +20,22 @@ void PmergeMe::print(int ac, char **av)
         }
         vector_arr.push_back(num);
     }
-	std::cout << "Vector\n";
+	std::cout << "Before: ";
 	display(vector_arr);
-	display(fordJohnsonSort(vector_arr));
-	std::cout << "Deque\n";
+	clock_t start_time = clock();
+	std::vector<int> sorted_vector = fordJohnsonSort(vector_arr);
+	clock_t end_time = clock();
+	double  vector_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
+	std::cout << "After: ";
 	std::deque<int> deque_arr(vector_arr.begin(), vector_arr.end());
-	display(deque_arr);
-	// fordJohnsonSort(deque_arr);
-	display(fordJohnsonSort(deque_arr));
-	// std::cout << "STACK\n";
-	// std::stack<int> myStack;
+	start_time = clock();
+	std::deque<int> sorted_deque = fordJohnsonSort(deque_arr);
+	end_time = clock();
+	display(sorted_deque);
+	double  deque_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
+    std::cout << "Time to process with vector container: " << std::fixed << std::setprecision(5) << vector_time << " seconds\n";
+    std::cout << "Time to process with deque container:  " << std::fixed << std::setprecision(5) << deque_time << " seconds\n";
 
-    // // Push elements onto the stack (1, 2, 3, 4)
-    // myStack.push(1);
-    // myStack.push(2);
-    // myStack.push(3);
-    // myStack.push(4);
-	// fordJohnsonSort(myStack);
 }
 
 // //======VECTOR======
