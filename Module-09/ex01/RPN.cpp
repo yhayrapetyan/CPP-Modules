@@ -1,5 +1,6 @@
 #include "RPN.hpp"
 #include <cctype>
+#include <climits>
 #include <cstddef>
 
 Calculator::Calculator(){};
@@ -33,22 +34,37 @@ bool Calculator::isValidInput(std::string &str)    {
     return true ;
 }
 
-int Calculator::operation(int num1, int num2, char op)    {
-    if (op == '+')
-        return num1 + num2;
-    else if (op == '-')
-        return num1 - num2;
-    else if (op == '*')
-        return num1 * num2;
-    else if (op == '/') {
-        if (num2 == 0) {
-            std::cout << "Error: you can't divide to 0\n";
+int Calculator::operation(long long int num1,long long  int num2, char op)    {
+    long long int result;
+
+	result = 0;
+	switch (op) {
+        case '+':
+            result = num1 + num2;
+            break;
+        case '-':
+            result = num1 - num2;
+            break;
+        case '*':
+            result = num1 * num2;
+            break;
+        case '/':
+            if (num2 == 0) {
+                std::cout << "Error: you can't divide by 0\n";
+                exit(1);
+            }
+            result = num1 / num2;
+            break;
+        default:
+            std::cout << "Error: Wrong input\n";
             exit(1);
-        }
-        return num1 / num2;
     }
-    std::cout << "Error: Wrong input\n";
-    exit(1);
+
+    if (result > INT_MAX || result < INT_MIN) {
+        std::cout << "Error: overflow\n";
+        exit(1);
+    }
+	return (result);
 }
 
 int Calculator::calculate(std::string &str)  { 

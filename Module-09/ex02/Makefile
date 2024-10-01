@@ -2,7 +2,7 @@ SRC = main.cpp PmergeMe.cpp
 OBJ = $(SRC:.cpp=.o)
 CC = c++
 RM = rm -f
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -fsanitize=address
 
 NAME = PmergeMe
 

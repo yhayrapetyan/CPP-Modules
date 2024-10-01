@@ -17,7 +17,7 @@ public:
 private:
 	static bool isOperation(char token);
 	static bool isValidInput(std::string &str);
-	static int  operation(int num1, int num2, char op);
+	static int  operation(long long int num1,long long  int num2, char op);
 };
 
 #endif
