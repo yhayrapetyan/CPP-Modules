@@ -1,4 +1,5 @@
 #include "RPN.hpp"
+#include <cctype>
 #include <cstddef>
 
 Calculator::Calculator(){};
@@ -76,6 +77,10 @@ int Calculator::calculate(std::string &str)  {
             stack.push(res);
         } else {
             int number = static_cast<int>(str[i] - '0');
+			if (std::isdigit(str[i + 1])) {
+				std::cout << "Error: you can't pass numbers which are greater than 9\n";
+				exit(1); 
+			}
             stack.push(number);
         }
     }
