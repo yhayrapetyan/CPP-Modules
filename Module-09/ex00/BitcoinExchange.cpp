@@ -1,5 +1,4 @@
 #include "BitcoinExchange.hpp"
-#include <iostream>
 
 BitcoinExchange::BitcoinExchange(){};
 BitcoinExchange::~BitcoinExchange(){};
@@ -19,11 +18,18 @@ BitcoinExchange::BitcoinExchange(const std::string &filename): _input(filename) 
         std::cout << "Error: could not find data.csv\n";
         exit (1);
     }
+
     std::string header;
     if (!getline(datafile, header)) {
         std::cout << "Error: data.csv or file is empty\n";
         exit(1);
     }
+
+	if (header != "date,exchange_rate") {
+        std::cout << "Error: invalid database file header\n";
+        exit(1);
+    }
+
     std::string     line;
     while (getline(datafile, line)) {
         size_t      delim_position = line.find(',');
@@ -168,12 +174,12 @@ void    BitcoinExchange::exchange()   {
 			std::map<std::string, double>::iterator current_price = this->_database.lower_bound(data);
 			if (current_price == this->_database.end()) {
                 --current_price;
-			} else if (current_price != this->_database.begin()){
-                std::map<std::string, double>::iterator prevIt = current_price;
-                --prevIt;
-                // --current_price;
-                if ((data.compare(current_price->first) - data.compare(prevIt->first)) > 0)
-                    current_price = prevIt;             
+			} else if (current_price != this->_database.begin() && current_price->first != data) {
+					std::map<std::string, double>::iterator prevIt = current_price;
+					current_price--;
+					--prevIt;
+					if ((data.compare(current_price->first) - data.compare(prevIt->first)) > 0)
+						current_price = prevIt;  
             }
 			double exchangeRate = current_price->second;
             double result = price * exchangeRate;
