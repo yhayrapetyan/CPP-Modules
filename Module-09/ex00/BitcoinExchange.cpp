@@ -164,6 +164,11 @@ void    BitcoinExchange::exchange()   {
 		}
 
 		std::string     value = line.substr(delim_position + 2);
+		if (!this->isValidFloat(value)) {
+			std::cout << "Error: not valid price: " << value << "\n";
+			continue;
+		}
+		
 		try {
             double  price = stringToDouble(value);
 			if (price < 0 || price > 1000) {
