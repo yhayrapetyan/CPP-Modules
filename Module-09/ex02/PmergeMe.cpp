@@ -36,15 +36,15 @@ void PmergeMe::print(int ac, char **av)
 	std::cout << "Before: ";
 	display(vector_arr);
 	clock_t start_time = clock();
-	std::vector<int> sorted_vector = fordJohnsonSort(vector_arr);
+	fordJohnsonSort(vector_arr);
 	clock_t end_time = clock();
 	double  vector_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
 	std::cout << "After: ";
 	std::deque<int> deque_arr(vector_arr.begin(), vector_arr.end());
 	start_time = clock();
-	std::deque<int> sorted_deque = fordJohnsonSort(deque_arr);
+	fordJohnsonSort(deque_arr);
 	end_time = clock();
-	display(sorted_deque);
+	display(deque_arr);
 	double  deque_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
     std::cout << "Time to process with vector container: " << std::fixed << std::setprecision(5) << vector_time << " seconds\n";
     std::cout << "Time to process with deque container:  " << std::fixed << std::setprecision(5) << deque_time << " seconds\n";

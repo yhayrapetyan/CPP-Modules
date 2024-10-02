@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <ctime>
 #include <stack>
+#include <cmath>
 
 class PmergeMe
 {
@@ -46,21 +47,82 @@ Container merge(const Container& left, const Container& right) {
 }
 
 template <typename Container>
-Container fordJohnsonSort(Container& cont) {
-    if (cont.size() <= 1) {
-        return cont;
-    }
+void	inserion_sort(Container &c)
+{
+	for (size_t i = 1; i < c.size(); i++)
+	{
+		int	j = i;
+		while (j > 0 && c[j - 1] > c[j])
+		{
+			std::swap(c[j - 1], c[j]);
+			j--;
+		}
+	}
+}
 
-    typename Container::iterator mid = cont.begin();
-    std::advance(mid, cont.size() / 2);
+template <typename Container>
+void	insert(Container &left, Container &right)
+{
+	size_t n = 0;
+	size_t power = 0;
+	size_t start = 0;
+	size_t end = 0;
 
-    Container left(cont.begin(), mid);
-    Container right(mid, cont.end());
+	for (size_t i = 0; i < right.size();)
+	{
+		++power;
 
-    left = fordJohnsonSort(left);
-    right = fordJohnsonSort(right);
+		n = pow(2, power) - n;
 
-    return merge(left, right);
+		start += n;
+
+		end = start - n;
+
+		if (start > right.size())
+			start = right.size();
+
+		for (size_t j = start - 1; j >= end;)
+		{
+			left.insert(std::upper_bound(left.begin(), left.end(), right[j]), right[j]);
+			++i;
+			if (j == 0)
+				break ;
+			--j;
+		}
+	}
+}
+
+
+template <typename Container>
+void fordJohnsonSort(Container& cont)
+{
+	Container	left;
+	Container	right;
+
+	if (cont.size() < 4) {
+		inserion_sort(cont);
+		return;
+	}
+	for (size_t i = 0; i < cont.size() / 2; i++)
+	{
+		int	_a = cont[2 * i];
+		int	_b = cont[2 * i + 1];
+		if (_a > _b)
+		{
+			left.push_back(_b);
+			right.push_back(_a);
+		}
+		else
+		{
+			left.push_back(_a);
+			right.push_back(_b);
+		}
+	}
+	if (cont.size() % 2 == 1)
+		right.push_back(cont[cont.size() - 1]);
+	fordJohnsonSort(left);
+	insert(left, right);
+	cont = left;
 }
 
 template<typename Container> 
