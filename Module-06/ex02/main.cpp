@@ -42,7 +42,7 @@ static void identify(Base &Test)
 	while (i < 3)
 	{
 		//maybe it's error because all casts should be the same type
-		Base *foo = NULL; // only to initialize the unused var
+		Base foo; // only to initialize the unused var
 		Base &unused = (Base &)foo; // only to prevent the -Werror from triggering for unused value of the casts
 		try
 		{
