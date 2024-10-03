@@ -10,11 +10,17 @@ void runTest(const std::string& literal) {
 }
 
 int main() {
-    // Test char literals
+	//Zeros
+    runTest("0");//check
+    runTest("0.0f");//check
+    runTest("0.0");//check
+
+	std::cout << "\n";
     runTest("a");
     runTest("Z");
     runTest("!");
 	std::cout << "\n";
+	
     
     // Test int literals
     runTest("0");//check
@@ -30,6 +36,7 @@ int main() {
     // Test float literals
     runTest("0.0f");//check
     runTest("-4.2f");
+	runTest("27.18");
     runTest("4.2f");
     runTest("-inff");
     runTest("+inff");
@@ -51,10 +58,6 @@ int main() {
     runTest("4.2.2");
 	std::cout << "\n";
 
-	//Zeros
-    runTest("0");//check
-    runTest("0.0f");//check
-    runTest("0.0");//check
 
     return 0;
 }

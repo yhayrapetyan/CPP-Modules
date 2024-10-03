@@ -1,4 +1,5 @@
 #include "ScalarConverter.hpp"
+#include "Utils.hpp"
 
 ScalarConverter::ScalarConverter(){}
 ScalarConverter::~ScalarConverter(){}
@@ -15,59 +16,16 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &other)   {
 }
 
 void ScalarConverter::convert(const string &str)   {
-    if (ScalarConverter::isChar(str))
+    if (Utils::isChar(str))
         ScalarConverter::convertChar(str);
-    else if (ScalarConverter::isInt(str))
+    else if (Utils::isInt(str))
         ScalarConverter::convertInt(str);
-    else if (ScalarConverter::isFloat(str))
+    else if (Utils::isFloat(str))
         ScalarConverter::convertFloat(str);
-    else if (ScalarConverter::isDouble(str))
+    else if (Utils::isDouble(str))
         ScalarConverter::convertDouble(str);
     else
         std::cout << "Invalid input: " << "[" << str << "]\n";
-}
-
-bool ScalarConverter::isChar(const std::string &str) {
-	return str.length() == 1 && !std::isdigit(str[0]) && std::isprint(str[0]);
-}
-
-bool ScalarConverter::isInt(const string &str)   {
-    std::istringstream str_stream_obj(str);
-    int n;
-    str_stream_obj >> n;
-    return !str_stream_obj.fail() && str_stream_obj.eof();
-}
-
-bool ScalarConverter::isFloat(const string &str) {
-    const char* cstr = str.c_str();
-    char* endptr;
-
-    std::strtof(cstr, &endptr);
-    if (endptr == cstr)
-        return false;
-    while (*endptr != '\0')
-    {
-        if (*endptr != 'f')
-            return false;
-        ++endptr;
-    }
-    return true;
-}
-
-bool ScalarConverter::isDouble(const string &str) {
-    const char* cstr = str.c_str();
-    char* endptr;
-
-    std::strtod(cstr, &endptr);
-    if (endptr == cstr)
-        return false;
-    while (*endptr != '\0')
-    {
-        if (*endptr != 'f')
-            return false;
-        ++endptr;
-    }
-    return true;
 }
 
 void    ScalarConverter::convertChar(const string &str) {
@@ -87,13 +45,12 @@ void    ScalarConverter::convertChar(const string &str) {
 }
 
 void ScalarConverter::convertInt(const string &str)  {
-	int	n;
 	
-	try {
-        n = std::stoi(str);
-    } catch (const std::out_of_range& e) {
-        std::cerr << "Out of range: " << e.what() << "\n";
-    }
+	if (Utils::chekcOverflow((string)str)) {
+		std::cerr << "Int overflow of: " << str << "\n";
+		return;
+	}
+	int n = Utils::strToInt(str);
     if (n < 0 || n > 127)
         std::cout << "char:   impossible\n";
     else if (n >= 32 && n < 127)
@@ -105,51 +62,55 @@ void ScalarConverter::convertInt(const string &str)  {
     std::cout << "double: " << static_cast<double>(n) <<".0\n";
 }
 
-bool ScalarConverter::check_limits(const string &str)
-{
-    if (str == "inf" || str == "+inf" || str == "-inf" || str == "inff" || str == "+inff" || str == "-inff" || str == "nan" || str == "nanf")
-        return true;
-    return false;
-}
 
 void ScalarConverter::convertFloat(const string &str) {
-    float number = std::stof(str);
-	std::ios oldState(nullptr);
+	float number = Utils::strToFloat(str);
+	std::ios oldState(NULL);
     oldState.copyfmt(std::cout);
 
-    if (ScalarConverter::check_limits(str) || number < 0 || number > 127)
+    if (Utils::check_limits(str) || number < 0 || number > 127)
         std::cout << "char: impossible\n";
     else if (number >= 32 && number < 127)
         std::cout << "char: " << static_cast<char>(number) << "\n";
     else
         std::cout << "char: Non displayable\n";
-    if (ScalarConverter::check_limits(str) || number > INT_MAX || number < INT_MIN)
+    if (Utils::check_limits(str) || number > INT_MAX || number < INT_MIN)
         std::cout << "int: impossible\n";
     else
         std::cout << "int: " << static_cast<int>(number) << "\n";
 	std::cout << std::fixed << std::setprecision(1);
-    std::cout << "float: "  << static_cast<float>(number)  << "f\n";
-    std::cout << "double: " << static_cast<double>(number) << "\n";
+	if (Utils::check_limits(str)) {
+		std::cout << "float: " << str << "\n";
+		std::cout << "double: " << str << "\n";
+	} else {
+		std::cout << "float: "  << static_cast<float>(number)  << "f\n";
+		std::cout << "double: " << static_cast<double>(number) << "\n";
+	}
 	std::cout.copyfmt(oldState);
 }
 
 void ScalarConverter::convertDouble(const string &str) {
     double number = std::stod(str);
-	std::ios oldState(nullptr);
+	std::ios oldState(NULL);
     oldState.copyfmt(std::cout);
 
-    if (ScalarConverter::check_limits(str) || number < 0 || number > 127)
+    if (Utils::check_limits(str) || number < 0 || number > 127)
         std::cout << "char: impossible\n";
     else if (number >= 32 && number < 127)
         std::cout << "char: " << static_cast<char>(number) <<  "\n";
     else
         std::cout << "char: Non Displayable\n";
-    if (ScalarConverter::check_limits(str) || number > INT_MAX || number < INT_MIN)
+    if (Utils::check_limits(str) || number > INT_MAX || number < INT_MIN)
         std::cout << "int: impossible\n";
     else
         std::cout << "int: "    << static_cast<int>(number) << "\n";
 	std::cout << std::fixed << std::setprecision(1);
-    std::cout << "float: "  << static_cast<float>(number)  <<"f\n";
-    std::cout << "double: " << number << "\n";
+    if (Utils::check_limits(str)) {
+		std::cout << "float: " << str << "\n";
+		std::cout << "double: " << str << "\n";
+	} else {
+		std::cout << "float: "  << static_cast<float>(number)  << "f\n";
+		std::cout << "double: " << static_cast<double>(number) << "\n";
+	}
 	std::cout.copyfmt(oldState);
 }

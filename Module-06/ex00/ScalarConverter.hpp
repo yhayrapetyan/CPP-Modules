@@ -7,6 +7,7 @@
 #include <sstream>
 #include <iomanip>
 #include <limits>
+#include <string>
 
 typedef std::string string;
 
@@ -22,17 +23,10 @@ private:
 	ScalarConverter &operator=(const ScalarConverter &other);
 	~ScalarConverter();
 
-	static bool isInt(const string& str);
-	static bool isChar(const string& str);
-	static bool isFloat(const string& str);
-	static bool isDouble(const string& str);
-	
 	static void convertChar(const string& str);
 	static void convertInt(const string& str);
 	static void convertFloat(const string& str);
 	static void convertDouble(const string& str);
-
-	static bool check_limits(const string &str);
 
 };
 
