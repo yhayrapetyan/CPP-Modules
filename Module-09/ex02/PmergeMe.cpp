@@ -1,6 +1,5 @@
 #include "PmergeMe.hpp"
-#include <climits>
-#include <deque>
+
 
 PmergeMe::PmergeMe(){};
 PmergeMe::PmergeMe(const PmergeMe &other){
@@ -14,10 +13,17 @@ PmergeMe::~PmergeMe(){};
 
 static bool chekcOverflow(char  *line)
 {
-	if (std::strlen(line) > 11)
-		return (true);
 	long	nbr = std::atol(line);
 	return (nbr > INT_MAX || nbr < INT_MIN);
+}
+
+static bool isValidInt(const std::string &str)   {
+	int len = str.length();
+	for (int i = 0; i < len; i++) {
+		if (!std::isdigit(str[i]))
+			return false;
+	}
+	return true;
 }
 
 void PmergeMe::print(int ac, char **av)
@@ -29,6 +35,10 @@ void PmergeMe::print(int ac, char **av)
 		line = av[i];
 		if (line.find(" ") != std::string::npos) {
 			std::cout << "Error: input shouldn't contain spaces\n";
+			exit(1);
+		}
+		if (!isValidInt(av[i])) {
+			std::cout << "Error:: Invalid int " << av[i] << "\n";
 			exit(1);
 		}
 		if (chekcOverflow(av[i])) {

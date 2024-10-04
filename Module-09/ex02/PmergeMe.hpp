@@ -9,6 +9,11 @@
 #include <ctime>
 #include <stack>
 #include <cmath>
+#include <iomanip>
+#include <cctype>
+#include <climits>
+#include <cstddef>
+#include <deque>
 
 class PmergeMe
 {
