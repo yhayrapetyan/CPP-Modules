@@ -2,6 +2,16 @@
 #include <climits>
 #include <deque>
 
+PmergeMe::PmergeMe(){};
+PmergeMe::PmergeMe(const PmergeMe &other){
+	(void)other;
+};
+PmergeMe &PmergeMe::operator=(const PmergeMe &other){
+	(void)other;
+	return (*this);
+};
+PmergeMe::~PmergeMe(){};
+
 static bool chekcOverflow(char  *line)
 {
 	if (std::strlen(line) > 11)
@@ -33,6 +43,7 @@ void PmergeMe::print(int ac, char **av)
         }
         vector_arr.push_back(num);
     }
+	std::deque<int> deque_arr(vector_arr.begin(), vector_arr.end());
 	std::cout << "Before: ";
 	display(vector_arr);
 	clock_t start_time = clock();
@@ -40,7 +51,6 @@ void PmergeMe::print(int ac, char **av)
 	clock_t end_time = clock();
 	double  vector_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
 	std::cout << "After: ";
-	std::deque<int> deque_arr(vector_arr.begin(), vector_arr.end());
 	start_time = clock();
 	fordJohnsonSort(deque_arr);
 	end_time = clock();
