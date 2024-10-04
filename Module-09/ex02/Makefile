@@ -19,8 +19,8 @@ fclean: clean
 
 re: fclean $(NAME)
 
-test_checker: $(NAME) $(BONUS_NAME)
+generate: $(NAME) $(BONUS_NAME)
 	$(eval ARG = $(shell jot -r 3000 0 5000000))
 	./PmergeMe $(ARG)
 
-.PHONY: all clean fclean re test_checker
+.PHONY: all clean fclean re generate

@@ -25,28 +25,6 @@ private:
 };
 
 template <typename Container>
-Container merge(const Container& left, const Container& right) {
-    Container result;
-    typename Container::const_iterator l_it = left.begin();
-    typename Container::const_iterator r_it = right.begin();
-
-    while (l_it != left.end() && r_it != right.end()) {
-        if (*l_it <= *r_it) {
-            result.push_back(*l_it);
-            ++l_it;
-        } else {
-            result.push_back(*r_it);
-            ++r_it;
-        }
-    }
-
-    result.insert(result.end(), l_it, left.end());
-    result.insert(result.end(), r_it, right.end());
-
-    return result;
-}
-
-template <typename Container>
 void	inserion_sort(Container &c)
 {
 	for (size_t i = 1; i < c.size(); i++)
