@@ -7,10 +7,14 @@ int	main(int ac, char **av)
 		std::cout << "Error: invalid numbers of argument\n";
 		return (1);
 	}
-	std::string filename = av[1];
-    BitcoinExchange btc(filename);
+	try {
+		std::string filename = av[1];
+		BitcoinExchange btc(filename);
 
-	btc.exchange();
+		btc.exchange();
+	} catch (std::exception &e) {
+		std::cout << "Error: " << e.what() << "\n";
+	}
 
 	return (0);
 }

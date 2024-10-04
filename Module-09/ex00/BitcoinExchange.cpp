@@ -3,7 +3,6 @@
 BitcoinExchange::BitcoinExchange(){};
 BitcoinExchange::~BitcoinExchange(){};
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &copy): _input(copy._input), _database(copy._database){}
-
 BitcoinExchange	&BitcoinExchange::operator=(const BitcoinExchange &other)   {
 	if (this == &other)
 		return (*this);
@@ -12,49 +11,73 @@ BitcoinExchange	&BitcoinExchange::operator=(const BitcoinExchange &other)   {
 	return (*this);
 }
 
+BitcoinExchange::InvalidDateFormat::InvalidDateFormat(){}
+BitcoinExchange::InvalidDateFormat::InvalidDateFormat(const std::string &line):_line(line) {}
+BitcoinExchange::InvalidDateFormat::~InvalidDateFormat() throw() {}
+BitcoinExchange::InvalidDateFormat::InvalidDateFormat(const InvalidDateFormat &other): _line(other._line){};
+BitcoinExchange::InvalidDateFormat &BitcoinExchange::InvalidDateFormat::operator=(const InvalidDateFormat &other) {
+	if (this == &other)
+		return (*this);
+	this->_line = other._line;
+	return (*this);
+};
+
+BitcoinExchange::InvalidPrice::InvalidPrice(){}
+BitcoinExchange::InvalidPrice::InvalidPrice(const std::string &line):_line(line) {}
+BitcoinExchange::InvalidPrice::~InvalidPrice() throw() {}
+BitcoinExchange::InvalidPrice::InvalidPrice(const InvalidPrice &other): _line(other._line){};
+BitcoinExchange::InvalidPrice &BitcoinExchange::InvalidPrice::operator=(const InvalidPrice &other) {
+	if (this == &other)
+		return (*this);
+	this->_line = other._line;
+	return (*this);
+};
+
+char	const *BitcoinExchange::DataOpenException::what() 	const throw(){ return ("Error: could not find data.csv");}
+char	const *BitcoinExchange::MissingDataHeader::what() 	const throw(){ return ("Error: missing data.csv header");}
+char	const *BitcoinExchange::InvalidDataHeader::what() 	const throw(){ return ("Error: invalid data.csv header");}
+char	const *BitcoinExchange::MissingDataDelim::what() 	const throw(){ return ("Error: invalid date format in data.csv");}
+char	const *BitcoinExchange::InvalidDateFormat::what() 	const throw(){ return (("Error: not valid date: " + _line).c_str());}
+char	const *BitcoinExchange::MissingPrice::what() 		const throw(){ return ("Error: missing price value");}
+char	const *BitcoinExchange::InvalidPrice::what() 		const throw(){ return (("Error: not valid price: " + _line).c_str());}
+char	const *BitcoinExchange::InvalidPriceValue::what() 	const throw(){ return ("Error: price can't be negative value ");}
+char	const *BitcoinExchange::InputOpenException::what() 	const throw(){ return ("Error: could not open input file");}
+char	const *BitcoinExchange::InputEmptyException::what() const throw(){ return ("Error: input file is empty");}
+char	const *BitcoinExchange::InvalidInputHeader::what() 	const throw(){ return ("Error: invalid or missing input file header");}
+
+
+
 BitcoinExchange::BitcoinExchange(const std::string &filename): _input(filename)    {
     std::ifstream   datafile("data.csv");
-    if(!datafile) {
-        std::cout << "Error: could not find data.csv\n";
-        exit (1);
-    }
+    if(!datafile)
+		throw DataOpenException();
 
     std::string header;
-    if (!getline(datafile, header)) {
-        std::cout << "Error: data.csv or file is empty\n";
-        exit(1);
-    }
+    if (!getline(datafile, header)) 
+		throw MissingDataHeader();
 
-	if (header != "date,exchange_rate") {
-        std::cout << "Error: invalid database file header\n";
-        exit(1);
-    }
+	if (header != "date,exchange_rate") 
+		throw InvalidDataHeader();
 
     std::string     line;
     while (getline(datafile, line)) {
         size_t      delim_position = line.find(',');
-        if (delim_position == std::string::npos) {
-            std::cout << "Error: invalid data format in data.csv.\n";
-            exit (1);  
-        }
+        if (delim_position == std::string::npos) 
+			throw MissingDataDelim();
 
 		std::string     date = line.substr(0, delim_position);
-		if (!this->isValidDateFormat(date)|| !isValidDate(date)) {
-			std::cout << "Error: not valid date: " << date << "\n";
-			exit(1);
-		}
+		if (!this->isValidDateFormat(date)|| !isValidDate(date))
+			throw InvalidDateFormat(line);
 
+		if (delim_position == line.length() - 1)
+			throw MissingPrice();
 		std::string		price_value = line.substr(delim_position + 1);
-		if (!this->isValidFloat(price_value)) {
-			std::cout << "Error: not valid price: " << price_value << "\n";
-			exit(1);
-		}
+		if (!this->isValidFloat(price_value))
+			throw InvalidPrice(line);
 
 		double          price = stringToDouble(price_value);
-		if (price < 0) {
-			std::cout << "Error: price can't be negative value\n";
-			exit(1);
-		}
+		if (price < 0) 
+			throw InvalidPriceValue();
 		this->_database[date] = price;
     }
     datafile.close();
@@ -124,21 +147,16 @@ double BitcoinExchange::stringToDouble(const std::string& str) {
 void    BitcoinExchange::exchange()   {
 
 	std::ifstream   infile(this->_input);
-    if (!infile.is_open()) {
-        std::cout << "Error: could not open file: " << this->_input << "\n";
-        exit (1);         
-    }
+    if (!infile.is_open())
+		throw InputOpenException();
 
 	std::string line;
-    if (!getline(infile, line)) {
-		std::cout << "Error: input file is empty\n";
-		exit(1);
-	}
+    if (!getline(infile, line))
+		throw InputEmptyException();
 
-	if (line != "date | value") {
-        std::cout << "Error: invalid or missing input file header\n";
-        exit(1);
-    }
+	if (line != "date | value")
+		throw InvalidInputHeader();
+	
 	while (getline(infile, line))
 	{
 		if (line.empty())
@@ -163,6 +181,10 @@ void    BitcoinExchange::exchange()   {
 			continue;
 		}
 
+		if (delim_position == line.length() - 1) {
+			std::cout << "Error: missing price value for line => " << line << "\n";
+			continue;
+		}
 		std::string     value = line.substr(delim_position + 2);
 		if (!this->isValidFloat(value)) {
 			std::cout << "Error: not valid price: " << value << "\n";
