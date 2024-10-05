@@ -33,51 +33,54 @@ BitcoinExchange::InvalidPrice &BitcoinExchange::InvalidPrice::operator=(const In
 	return (*this);
 };
 
-char	const *BitcoinExchange::DataOpenException::what() 	const throw(){ return ("Error: could not find data.csv");}
-char	const *BitcoinExchange::MissingDataHeader::what() 	const throw(){ return ("Error: missing data.csv header");}
-char	const *BitcoinExchange::InvalidDataHeader::what() 	const throw(){ return ("Error: invalid data.csv header");}
-char	const *BitcoinExchange::MissingDataDelim::what() 	const throw(){ return ("Error: invalid date format in data.csv");}
-char	const *BitcoinExchange::InvalidDateFormat::what() 	const throw(){ return (("Error: not valid date: " + _line).c_str());}
-char	const *BitcoinExchange::MissingPrice::what() 		const throw(){ return ("Error: missing price value");}
-char	const *BitcoinExchange::InvalidPrice::what() 		const throw(){ return (("Error: not valid price: " + _line).c_str());}
-char	const *BitcoinExchange::InvalidPriceValue::what() 	const throw(){ return ("Error: price can't be negative value ");}
-char	const *BitcoinExchange::InputOpenException::what() 	const throw(){ return ("Error: could not open input file");}
-char	const *BitcoinExchange::InputEmptyException::what() const throw(){ return ("Error: input file is empty");}
-char	const *BitcoinExchange::InvalidInputHeader::what() 	const throw(){ return ("Error: invalid or missing input file header");}
+BitcoinExchange::DefaultException::DefaultException(){}
+BitcoinExchange::DefaultException::DefaultException(const std::string &message):_message(message) {}
+BitcoinExchange::DefaultException::~DefaultException() throw() {}
+BitcoinExchange::DefaultException::DefaultException(const DefaultException &other): _message(other._message){};
+BitcoinExchange::DefaultException &BitcoinExchange::DefaultException::operator=(const DefaultException &other) {
+	if (this == &other)
+		return (*this);
+	this->_message = other._message;
+	return (*this);
+};
 
+
+char	const *BitcoinExchange::InvalidDateFormat::what() 	const throw(){ return (("Not valid date: " + _line).c_str());}
+char	const *BitcoinExchange::InvalidPrice::what() 		const throw(){ return (("Not valid price: " + _line).c_str());}
+char	const *BitcoinExchange::DefaultException::what() 	const throw(){ return (_message.c_str());}
 
 
 BitcoinExchange::BitcoinExchange(const std::string &filename): _input(filename)    {
     std::ifstream   datafile("data.csv");
     if(!datafile)
-		throw DataOpenException();
+		throw DefaultException("Could not find data.csv");
 
     std::string header;
     if (!getline(datafile, header)) 
-		throw MissingDataHeader();
+		throw DefaultException("Missing data.csv header");
 
 	if (header != "date,exchange_rate") 
-		throw InvalidDataHeader();
+		throw DefaultException("Invalid data.csv header");
 
     std::string     line;
     while (getline(datafile, line)) {
         size_t      delim_position = line.find(',');
-        if (delim_position == std::string::npos) 
-			throw MissingDataDelim();
+        if (delim_position == std::string::npos)
+			throw DefaultException("Missing data.csv delimetr");
 
 		std::string     date = line.substr(0, delim_position);
 		if (!this->isValidDateFormat(date)|| !isValidDate(date))
 			throw InvalidDateFormat(line);
 
 		if (delim_position == line.length() - 1)
-			throw MissingPrice();
+			throw DefaultException("Missing price value");
 		std::string		price_value = line.substr(delim_position + 1);
 		if (!this->isValidFloat(price_value))
 			throw InvalidPrice(line);
 
 		double          price = stringToDouble(price_value);
 		if (price < 0) 
-			throw InvalidPriceValue();
+			throw DefaultException("Price can't be negative value");
 		this->_database[date] = price;
     }
     datafile.close();
@@ -138,79 +141,97 @@ double BitcoinExchange::stringToDouble(const std::string& str) {
     double result;
 
     ss >> result;
-    if (ss.fail()) {
+    if (ss.fail() && !ss.eof()) {
         return -1;
     }
     return result;
 }
 
+
+std::map<std::string, double> BitcoinExchange::isValidInput(std::string line)
+{
+	std::map<std::string, double> result;
+
+	if (line.empty()){
+		return result;
+	}
+
+	size_t	delim_position = line.find('|');
+	if (delim_position == std::string::npos) {
+		std::cout << "Error: bad input: [" << line << "]\n";
+		return result ;  
+	}
+
+	if (delim_position == line.length() - 1) {
+		std::cout << "Error: missing price value for line => " << line << "\n";
+		return result;
+	}
+
+	if (line[delim_position + 1] != ' ') {
+		std::cout << "Error: after delimetr should be space, before specifying price\n";
+		return result;
+	}
+
+	std::string     data = line.substr(0, delim_position - 1);
+	if (!isValidDateFormat(data) || !isValidDate(data))
+	{
+		std::cout << "Error: invalid date format: " << data << "\n";
+		return result;
+	}
+
+	std::string earliestDate = this->_database.begin()->first;
+	if (data < earliestDate) {
+		std::cout << "Error: no info for date " << data << "\n";
+		return result;
+	}
+
+	std::string     value = line.substr(delim_position + 2);
+	if (!this->isValidFloat(value)) {
+		std::cout << "Error: not valid price: " << value << "\n";
+		return result;
+	}
+	double  price = stringToDouble(value);
+	if (price < 0 || price > 1000) {
+		std::cout << "Error: values should be in range [0-1000] not: " << value << "\n";
+		return result;
+	}
+	result[data] = price;
+	return (result);
+}
+
 void    BitcoinExchange::exchange()   {
+	std::map<std::string, double> input;
 
 	std::ifstream   infile(this->_input);
     if (!infile.is_open())
-		throw InputOpenException();
+		throw DefaultException("Could not open input file");
 
 	std::string line;
     if (!getline(infile, line))
-		throw InputEmptyException();
+		throw DefaultException("Input file is empty");
 
 	if (line != "date | value")
-		throw InvalidInputHeader();
+		throw DefaultException("Invalid or missing input file header");
 	
 	while (getline(infile, line))
-	{
-		if (line.empty())
+	{	
+		input = isValidInput(line);
+		if (input.size() == 0)
 			continue;
-
-		size_t	delim_position = line.find('|');
-		if (delim_position == std::string::npos) {
-            std::cerr << "Error: bad input: [" << line << "]\n";
-            continue ;  
-        }
-
-		std::string     data = line.substr(0, delim_position - 1);
-		if (!isValidDateFormat(data) || !isValidDate(data))
-        {
-			std::cout << "Error: invalid date format: " << data << "\n";
-			continue;
-		}
-
-		std::string earliestDate = this->_database.begin()->first;
-		if (data < earliestDate) {
-			std::cout << "Error: no info for date " << data << "\n";
-			continue;
-		}
-
-		if (delim_position == line.length() - 1) {
-			std::cout << "Error: missing price value for line => " << line << "\n";
-			continue;
-		}
-		std::string     value = line.substr(delim_position + 2);
-		if (!this->isValidFloat(value)) {
-			std::cout << "Error: not valid price: " << value << "\n";
-			continue;
-		}
-		
 		try {
-            double  price = stringToDouble(value);
-			if (price < 0 || price > 1000) {
-				std::cout << "Error: values should be in range [0-1000] not: " << value << "\n";
-				continue;
-			}
-
-			std::map<std::string, double>::iterator current_price = this->_database.lower_bound(data);
+			std::map<std::string, double>::iterator current_price = this->_database.lower_bound(input.begin()->first);
 			if (current_price == this->_database.end()) {
                 --current_price;
-			} else if (current_price != this->_database.begin() && current_price->first != data) {
+			} else if (current_price != this->_database.begin() && current_price->first != input.begin()->first) {
 					std::map<std::string, double>::iterator prevIt = current_price;
 					current_price--;
 					--prevIt;
-					if ((data.compare(current_price->first) - data.compare(prevIt->first)) > 0)
+					if ((input.begin()->first.compare(current_price->first) -input.begin()->first.compare(prevIt->first)) > 0)
 						current_price = prevIt;  
             }
 			double exchangeRate = current_price->second;
-            double result = price * exchangeRate;
-            std::cout << data << "=> " << value << " = " << result << "\n";
+            double result = input.begin()->second * exchangeRate;
+            std::cout << input.begin()->first << "=> " << input.begin()->second << " = " << result << "\n";
 		} catch (...) {
 			std::cout << "Error: bad input " << line << "\n";
 		}

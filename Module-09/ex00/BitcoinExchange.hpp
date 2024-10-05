@@ -41,6 +41,7 @@ class BitcoinExchange {
 		bool 	isValidFloat(const std::string& str);
         bool	isValidDate(const std::string &date);
         bool 	isLeapYear(int year);
+		std::map<std::string, double>  isValidInput(std::string line);
 
 		class InvalidPrice : public std::exception {
 		public:
@@ -65,15 +66,18 @@ class BitcoinExchange {
 		private:
 			std::string _line;
 		};
-		class InvalidPriceValue : public std::exception { public: char const  *what() const throw(); };
-		class DataOpenException : public std::exception { public: char const  *what() const throw(); };
-		class MissingDataHeader : public std::exception { public: char const  *what() const throw(); };
-		class InvalidDataHeader : public std::exception { public: char const  *what() const throw(); };
-		class MissingDataDelim : public std::exception { public: char const  *what() const throw(); };
-		class MissingPrice : public std::exception { public: char const  *what() const throw(); };
-		class InputOpenException : public std::exception { public: char const  *what() const throw(); };
-		class InputEmptyException : public std::exception { public: char const  *what() const throw(); };
-		class InvalidInputHeader : public std::exception { public: char const  *what() const throw(); };
+
+		class DefaultException : public std::exception { 
+		public:
+			DefaultException();
+			DefaultException(const DefaultException &other);
+			DefaultException &operator=(const DefaultException &other);
+			DefaultException(const std::string &line);
+			virtual ~DefaultException() throw();
+			char const  *what() const throw();
+		private:
+			std::string _message;
+		};
 };
 
 #endif
