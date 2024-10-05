@@ -19,7 +19,7 @@ fclean: clean
 
 re: fclean $(NAME)
 
-generate: $(NAME) $(BONUS_NAME)
+generate: $(NAME)
 	$(eval ARG = $(shell jot -r 3000 0 5000000))
 	./PmergeMe $(ARG)
 
