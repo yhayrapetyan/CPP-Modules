@@ -167,14 +167,18 @@ std::map<std::string, double> BitcoinExchange::isValidInput(std::string line)
 		return result;
 	}
 
-	if (line[delim_position + 1] != ' ') {
-		std::cout << "Error: after delimetr should be space, before specifying price\n";
+	if (delim_position == 0) {
+		std::cout << "Error: missing date => " << line << "\n";
+		return result;
+	}
+
+	if (line[delim_position + 1] != ' ' || line[delim_position - 1] != ' ') {
+		std::cout << "Error: delimetr should be surounded by spaces => " << line << "\n" ;
 		return result;
 	}
 
 	std::string     data = line.substr(0, delim_position - 1);
-	if (!isValidDateFormat(data) || !isValidDate(data))
-	{
+	if (!isValidDateFormat(data) || !isValidDate(data)) {
 		std::cout << "Error: invalid date format: " << data << "\n";
 		return result;
 	}
@@ -190,6 +194,7 @@ std::map<std::string, double> BitcoinExchange::isValidInput(std::string line)
 		std::cout << "Error: not valid price: " << value << "\n";
 		return result;
 	}
+	
 	double  price = stringToDouble(value);
 	if (price < 0 || price > 1000) {
 		std::cout << "Error: values should be in range [0-1000] not: " << value << "\n";
